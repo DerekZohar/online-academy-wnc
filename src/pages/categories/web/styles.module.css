@@ -1,0 +1,62 @@
+.banner {
+  display: flex;
+  height: 400px;
+  background-color: rgb(250, 251, 252);
+}
+.banner_left_part {
+  width: 50vw;
+  height: 400px;
+
+  margin: 3% 10%;
+}
+.banner_right_part {
+  width: 50vw;
+  height: 400px;
+}
+.course_title {
+  font-size: 42px;
+}
+.underline {
+  background-color: #4481eb;
+  height: 5px;
+  width: 100px;
+}
+.course_summary {
+  margin-top: 20px;
+}
+
+/* [descriptions] */
+.description {
+  display: flex;
+  height: auto;
+}
+.description_left_part {
+  width: 50vw;
+  height: 400px;
+
+  padding: 5% 0 0 10%;
+}
+.description_right_part {
+  width: 50vw;
+  height: 400px;
+
+  margin: 5% 0 0 0%;
+}
+.cts_group {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+}
+.content {
+  margin-top: 50px;
+}
+.descriptions_title {
+  font-size: 28px;
+}
+.description_item {
+  max-width: 550px;
+  font-size: medium;
+}
+.included_in_product {
+  margin: 10% 0 0 0%;
+}

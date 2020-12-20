@@ -1,0 +1,6 @@
+.root {
+  width: 300;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
