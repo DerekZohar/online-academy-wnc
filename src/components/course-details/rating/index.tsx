@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
 import styles from "./rating.module.css";
+import { formatNumber } from "../../../helpers/formatNumber";
 
 const labels: { [index: string]: string } = {
   0.5: "Useless",
@@ -52,7 +53,7 @@ export default function HoverRating({
     return (
       <div>
         <div className={styles.root}>
-          <p>{value}</p>
+          <p>{formatNumber(value)}</p>
           <Rating
             name="hover-feedback"
             value={value}

@@ -1,3 +1,3 @@
-export const formatNumber = (num:number)=>{
-    return String(num).replace(/(.)(?=(\d{3})+$)/g,'$1.')
+export const formatNumber = (num:number|null)=>{
+    return String(num?.toFixed(2)).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }

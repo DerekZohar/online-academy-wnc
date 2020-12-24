@@ -11,6 +11,7 @@ import LoginPage from "./pages/login";
 import firebase from "firebase";
 import { firebaseConfig } from "./services/firebase";
 import WebCategoryPage from "./pages/categories/web";
+import CategoryDetails from "./pages/categories";
 
 function App() {
   if (!firebase.apps.length) {
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route path={`/web/:webId`}>
           <WebCategoryPage />
+        </Route>
+        <Route path={`/course/:courseName`}>
+          <CategoryDetails />
         </Route>
         <Route path="/">
           <div />
