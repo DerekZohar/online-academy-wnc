@@ -1,0 +1,19 @@
+.root {
+  display: flex;
+  flex-direction: row;
+
+  padding: 2% 0;
+}
+.infomation {
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 20px;
+}
+.name {
+  font-weight: bold;
+  font-size: 24px;
+}
+.reivews {
+  padding: 0 10%;
+}
