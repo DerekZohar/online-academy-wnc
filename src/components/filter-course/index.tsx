@@ -20,7 +20,7 @@ export default function FilterCourse({ changeCourse }: { changeCourse: any }) {
   const values = ["4.5", "4.0", "3.5", "3.0"];
   return (
     <FormControl component="fieldset">
-      <FormLabel>Ratings</FormLabel>
+      <FormLabel style={{ fontSize: 24, color: "black" }}>Ratings</FormLabel>
       <RadioGroup
         aria-label="rating"
         name="rating"

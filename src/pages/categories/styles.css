@@ -2,7 +2,7 @@
   width: 20vw;
   display: flex;
   flex-direction: column;
-  padding: 1%;
+  padding: 2%;
 }
 .course-right {
   width: 80vw;
@@ -10,7 +10,7 @@
 .course-div {
   display: flex;
 
-  width: 100vw;
+  width: 100%;
 }
 .category {
   display: flex;
