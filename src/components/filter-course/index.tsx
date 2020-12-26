@@ -1,84 +1,40 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormLabel from "@material-ui/core/FormLabel";
-import Button from "@material-ui/core/Button";
+import HoverRating from "../course-details/rating";
+import "./styles.css";
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(3),
-  },
-  button: {
-    margin: theme.spacing(1, 1, 0, 0),
-  },
-}));
-
-export default function FilterCourse() {
-  const classes = useStyles();
+export default function FilterCourse({ changeCourse }: { changeCourse: any }) {
   const [value, setValue] = React.useState("");
-  const [error, setError] = React.useState(false);
-  const [helperText, setHelperText] = React.useState("Choose wisely");
 
-  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((event.target as HTMLInputElement).value);
-    setHelperText(" ");
-    setError(false);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let rating = (event.target as HTMLInputElement).value;
+    setValue(rating);
+    changeCourse(rating);
+    console.log(rating);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (value === "best") {
-      setHelperText("You got it!");
-      setError(false);
-    } else if (value === "worst") {
-      setHelperText("Sorry, wrong answer!");
-      setError(true);
-    } else {
-      setHelperText("Please select an option.");
-      setError(true);
-    }
-  };
-
+  const values = ["4.5", "4.0", "3.5", "3.0"];
   return (
-    <form onSubmit={handleSubmit}>
-      <FormControl
-        component="fieldset"
-        error={error}
-        className={classes.formControl}
+    <FormControl component="fieldset">
+      <FormLabel>Ratings</FormLabel>
+      <RadioGroup
+        aria-label="rating"
+        name="rating"
+        value={value}
+        onChange={handleChange}
       >
-        <FormLabel component="legend">Pop quiz: Material-UI is...</FormLabel>
-        <RadioGroup
-          aria-label="quiz"
-          name="quiz"
-          value={value}
-          onChange={handleRadioChange}
-        >
+        {values.map((item) => (
           <FormControlLabel
-            value="best"
+            value={item}
             control={<Radio />}
-            label="The best!"
+            label={<p>{item + " & up"}</p>}
           />
-          <FormControlLabel
-            value="worst"
-            control={<Radio />}
-            label="The worst."
-          />
-        </RadioGroup>
-        <FormHelperText>{helperText}</FormHelperText>
-        <Button
-          type="submit"
-          variant="outlined"
-          color="primary"
-          className={classes.button}
-        >
-          Check Answer
-        </Button>
-      </FormControl>
-    </form>
+        ))}
+      </RadioGroup>
+    </FormControl>
   );
 }

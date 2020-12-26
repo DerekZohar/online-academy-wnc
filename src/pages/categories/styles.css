@@ -1,8 +1,20 @@
 .course-left {
-  width: 30vw;
+  width: 20vw;
   display: flex;
   flex-direction: column;
+  padding: 1%;
 }
 .course-right {
-  width: 70vw;
+  width: 80vw;
+}
+.course-div {
+  display: flex;
+
+  width: 100vw;
+}
+.category {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  /* align-content: space-around; */
 }
