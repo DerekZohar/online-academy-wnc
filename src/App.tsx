@@ -11,6 +11,7 @@ import LoginPage from "./pages/login";
 import firebase from "firebase";
 import { firebaseConfig } from "./services/firebase";
 import WebCategoryPage from "./pages/categories/web";
+import Homepage from "./pages/home"
 
 function App() {
   if (!firebase.apps.length) {
@@ -29,7 +30,7 @@ function App() {
           <WebCategoryPage />
         </Route>
         <Route path="/">
-          <div />
+          <Homepage></Homepage>
         </Route>
       </Switch>
     </Router>
