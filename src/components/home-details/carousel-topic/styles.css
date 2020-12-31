@@ -1,0 +1,13 @@
+.button-group {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+#multicarousel-topic {
+  padding: 20px 0 0px 0;
+  width: 1200px;
+}
+.multicarousel-topic {
+  padding-top: 5%;
+}

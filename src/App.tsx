@@ -12,6 +12,7 @@ import firebase from "firebase";
 import { firebaseConfig } from "./services/firebase";
 import WebCategoryPage from "./pages/categories/web";
 import CategoryDetails from "./pages/categories";
+import HomePage from "./pages/home";
 
 function App() {
   if (!firebase.apps.length) {
@@ -23,6 +24,9 @@ function App() {
   return (
     <Router>
       <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
         <Route path="/login">
           <LoginPage />
         </Route>
@@ -31,9 +35,6 @@ function App() {
         </Route>
         <Route path={`/course/:courseName`}>
           <CategoryDetails />
-        </Route>
-        <Route path="/">
-          <div />
         </Route>
       </Switch>
     </Router>

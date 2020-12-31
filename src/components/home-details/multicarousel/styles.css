@@ -1,0 +1,27 @@
+.multicarousel {
+  padding: 5% 0 0 0;
+}
+.most-view {
+  padding-left: 5%;
+}
+div.multicarousel-content {
+  display: flex;
+  flex-direction: row;
+
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(0, 0, 0, 0.19);
+}
+#multicarousel-container {
+  padding: 20px 0 20px 0;
+  width: 1200px;
+  height: 200px;
+}
+/* #swiper-container .swiper-button-next {
+  position: relative;
+
+  padding: 10px;
+} */
+.price-course {
+  font-weight: bold;
+}
