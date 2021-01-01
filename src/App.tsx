@@ -13,6 +13,7 @@ import { firebaseConfig } from "./services/firebase";
 import WebCategoryPage from "./pages/categories/web";
 import CategoryDetails from "./pages/categories";
 import HomePage from "./pages/home";
+import Navbar from "./components/home-details/navbar";
 
 function App() {
   if (!firebase.apps.length) {
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <Router>
+      <Navbar />
       <Switch>
         <Route exact path="/">
           <HomePage />
