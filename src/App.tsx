@@ -24,7 +24,7 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
+      <Navbar isLogin={true} />
       <Switch>
         <Route exact path="/">
           <HomePage />

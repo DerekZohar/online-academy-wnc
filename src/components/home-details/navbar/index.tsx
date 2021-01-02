@@ -6,6 +6,8 @@ import styled from "styled-components";
 import Logo from "../../../assets/logo.svg";
 import SearchBar from "material-ui-search-bar";
 import MenuListComposition from "./menus";
+import AvatarUser from "./avatar";
+import { Avatar, Button } from "@material-ui/core";
 
 export const Nav = styled.nav`
   background: #fff;
@@ -79,16 +81,16 @@ export const NavBtnLink = styled(Link)`
   text-decoration: none;
 
   /* Second Nav */
-  margin-left: 24px;
+  // margin-left: 24px;
 
   &:hover {
     transition: all 0.2s ease-in-out;
-    background: #fff;
-    color: #010606;
+    background: #1854b4;
+    color: #fff;
   }
 `;
 
-export default function Navbar() {
+export default function Navbar({ isLogin }: { isLogin: boolean }) {
   // const [dataSrc, setDataSrc] = useState({
   //   dataSource: ["abc", "a", "abcdqwe"],
   // });
@@ -113,12 +115,18 @@ export default function Navbar() {
             maxWidth: 800,
           }}
         />
-        {/* Second Nav */}
-        {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
+
+        {!isLogin ? (
+          <div className="sign-in-log-out">
+            <Button href="/sign-out" color="primary">
+              Sign Out
+            </Button>
+            <NavBtnLink to="/sign-in">Sign In</NavBtnLink>
+          </div>
+        ) : (
+          <AvatarUser />
+        )}
       </NavMenu>
-      <NavBtn>
-        <NavBtnLink to="/signin">Sign In</NavBtnLink>
-      </NavBtn>
     </Nav>
   );
 }
