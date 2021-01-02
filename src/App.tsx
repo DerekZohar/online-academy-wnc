@@ -6,6 +6,7 @@ import {
   Route,
   Link,
   useRouteMatch,
+  BrowserRouter,
 } from "react-router-dom";
 import LoginPage from "./pages/login";
 import firebase from "firebase";
@@ -23,7 +24,35 @@ function App() {
   }
 
   return (
-    <Router>
+    <BrowserRouter>
+      <Switch>
+        <div className="App">
+          <Route exact path="/(login)" component={LoginPage} />
+          <Route component={DefaultContainer} />
+        </div>
+      </Switch>
+    </BrowserRouter>
+  );
+}
+
+const DefaultContainer = () => (
+  <div className="">
+    <Navbar isLogin={true} />
+    <Route exact path="/">
+      <HomePage />
+    </Route>
+    <Route path="/login">
+      <LoginPage />
+    </Route>
+    <Route path={`/web/:webId`}>
+      <WebCategoryPage />
+    </Route>
+    <Route path={`/course/:courseName`}>
+      <CategoryDetails />
+    </Route>
+  </div>
+);
+/*<Router>
       <Navbar isLogin={true} />
       <Switch>
         <Route exact path="/">
@@ -39,8 +68,5 @@ function App() {
           <CategoryDetails />
         </Route>
       </Switch>
-    </Router>
-  );
-}
-
+    </Router> */
 export default App;
