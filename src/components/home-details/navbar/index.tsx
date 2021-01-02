@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles.css";
 // import { FaBars } from "react-icons/fa";
-import { NavLink as Link } from "react-router-dom";
+import { NavLink as Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../../../assets/logo.svg";
 import SearchBar from "material-ui-search-bar";
@@ -94,12 +94,14 @@ export default function Navbar({ isLogin }: { isLogin: boolean }) {
   // const [dataSrc, setDataSrc] = useState({
   //   dataSource: ["abc", "a", "abcdqwe"],
   // });
+  const location = useLocation();
+  if (location.pathname === "/login") return null;
   return (
     <Nav>
       <NavLink to="/">
         <img src={Logo} alt="logo" />
-        <MenuListComposition />
       </NavLink>
+      <MenuListComposition />
       {/* <Bars /> */}
       <NavMenu>
         <SearchBar
