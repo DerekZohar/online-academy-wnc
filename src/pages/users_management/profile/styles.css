@@ -1,0 +1,11 @@
+.iconButton{
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.flex{
+    display: flex;
+    margin-bottom: 20px;
+}
