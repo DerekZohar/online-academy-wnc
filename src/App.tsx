@@ -10,10 +10,11 @@ import {
 import LoginPage from "./pages/login";
 import firebase from "firebase";
 import { firebaseConfig } from "./services/firebase";
-import WebCategoryPage from "./pages/categories/web";
+import WebCategoryPage from "./pages/categories/item";
 import CategoryDetails from "./pages/categories";
 import HomePage from "./pages/home";
 import Navbar from "./components/home-details/navbar";
+import PageNotFound from "./pages/page-not-found";
 
 function App() {
   if (!firebase.apps.length) {
@@ -35,9 +36,10 @@ function App() {
         <Route path={`/web/:webId`}>
           <WebCategoryPage />
         </Route>
-        <Route path={`/course/:courseName`}>
+        <Route path={`/categories`}>
           <CategoryDetails />
         </Route>
+        <Route component={PageNotFound} />
       </Switch>
     </Router>
   );

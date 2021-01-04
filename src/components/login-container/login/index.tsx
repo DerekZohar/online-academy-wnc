@@ -13,6 +13,9 @@ import {
   signInWithGoogle,
 } from "../../../services/firebase";
 import { Button, IconButton } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import useFullPageLoader from "../../../hooks/usePageLoader";
+import PageLoading from "../../loading";
 
 function Login() {
   // const dispatch = useDispatch();
@@ -21,7 +24,7 @@ function Login() {
   //   const handleLogin = (payload) => {
   //     dispatch(login(payload));
   //   };
-
+  const history = useHistory();
   const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
 
   // Listen to the Firebase Auth state and set the local state.
@@ -46,10 +49,12 @@ function Login() {
     onSubmit: async (values) => {
       await axios
         .post(`${process.env.REACT_APP_API_LOGIN}`, {
-          username: values.username,
+          email: values.username,
           password: values.password,
         })
         .then((res) => {
+          history.push("/");
+          // hideLoader();
           // if (res.data.authenticated === true) {
           //   const token = {
           //     accessToken: res.data.accessToken,
@@ -69,6 +74,7 @@ function Login() {
 
   return (
     <form action="#" className="sign-in-form" onSubmit={formik.handleSubmit}>
+      <PageLoading />
       <h2 className="title">Sign in</h2>
       <div className="input-field">
         <AccountCircle />
@@ -90,6 +96,7 @@ function Login() {
           value={formik.values.password}
         />
       </div>
+      {/* {loader} */}
       <Button color="primary">Forgot password?</Button>
       <input type="submit" defaultValue="Login" className="btn solid" />
       <p className="social-text">Or Sign in with social platforms</p>
