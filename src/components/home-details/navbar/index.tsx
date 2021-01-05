@@ -9,6 +9,7 @@ import MenuListComposition from "./menus";
 import AvatarUser from "./avatar";
 import { Avatar, Button } from "@material-ui/core";
 
+import { useSelector } from "react-redux";
 export const Nav = styled.nav`
   background: #fff;
   height: 80px;
@@ -90,10 +91,13 @@ export const NavBtnLink = styled(Link)`
   }
 `;
 
-export default function Navbar({ isLogin }: { isLogin: boolean }) {
+export default function Navbar() {
   // const [dataSrc, setDataSrc] = useState({
   //   dataSource: ["abc", "a", "abcdqwe"],
   // });
+
+  const user = useSelector((state: any) => state.user.value);
+  const isLogin = user.token ? true : false;
   const location = useLocation();
   if (location.pathname === "/login") return null;
   return (
@@ -123,7 +127,7 @@ export default function Navbar({ isLogin }: { isLogin: boolean }) {
             <Button href="/sign-out" color="primary">
               Sign Out
             </Button>
-            <NavBtnLink to="/sign-in">Sign In</NavBtnLink>
+            <NavBtnLink to="/login">Sign In</NavBtnLink>
           </div>
         ) : (
           <AvatarUser />

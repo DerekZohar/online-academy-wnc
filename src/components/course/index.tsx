@@ -1,5 +1,6 @@
 import { Face, People } from "@material-ui/icons";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { formatNumber } from "../../helpers/formatNumber";
 import HoverRating from "../course-details/rating";
 import "./styles.css";
@@ -23,8 +24,12 @@ export default function Course({
   price: number;
   discount: number;
 }) {
+  const history = useHistory();
+  const handleClick = () => {
+    history.push("/category/web/1");
+  };
   return (
-    <div className="course">
+    <div className="course" onClick={handleClick}>
       <img className="image-course" src={imgUrl} alt={title} />
       <div className="info">
         <p className="course-title">{title}</p>

@@ -8,6 +8,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Avatar, IconButton } from "@material-ui/core";
+import { logOut } from "../../../../services/firebase";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function AvatarUser() {
   const classes = useStyles();
+  const history = useHistory();
+
+  const user = useSelector((state: any) => state.user.value);
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
@@ -40,7 +46,13 @@ export default function AvatarUser() {
 
     setOpen(false);
   };
+  const handleLogOut = async () => {
+    console.log(132);
 
+    await logOut();
+    //update state of redux
+    // history.push("/login");
+  };
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === "Tab") {
       event.preventDefault();
@@ -79,8 +91,8 @@ export default function AvatarUser() {
       >
         <Avatar
           className={classes.imgBtn}
-          alt="A"
-          src="/static/images/avatar/1.jpg"
+          alt={user.firstName + user.lastName}
+          src={user.avatarUrl}
         />
       </IconButton>
       <Popper
@@ -112,7 +124,7 @@ export default function AvatarUser() {
                   <MenuItem onClick={handleClose}>Public Profile</MenuItem>
                   <MenuItem onClick={handleClose}>Edit Profile</MenuItem>
                   <hr />
-                  <MenuItem onClick={handleClose}>Log out</MenuItem>
+                  <MenuItem onClick={handleLogOut}>Log out</MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>

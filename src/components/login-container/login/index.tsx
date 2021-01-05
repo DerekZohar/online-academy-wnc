@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
-import { useDispatch } from "react-redux";
 import "./styles.css";
 import SocialMedia from "../social-media";
 
@@ -16,14 +15,19 @@ import { Button, IconButton } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import useFullPageLoader from "../../../hooks/usePageLoader";
 import PageLoading from "../../loading";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "../../../pages/login/loginSlice";
 
-function Login() {
-  // const dispatch = useDispatch();
-  //   const history = useHistory();
+function Login({
+  handleToggle,
+  handleClose,
+}: {
+  handleToggle: any;
+  handleClose: any;
+}) {
+  const user = useSelector((state: any) => state.user.value);
+  const dispatch = useDispatch();
 
-  //   const handleLogin = (payload) => {
-  //     dispatch(login(payload));
-  //   };
   const history = useHistory();
   const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
 
@@ -36,7 +40,12 @@ function Login() {
         setIsSignedIn(!!user);
         if (!user) {
           console.log("not user");
-        } else console.log("login: " + user.displayName);
+        } else {
+          // console.log({ first });
+
+          // console.log(userLogin);
+          console.log("login: " + user.displayName);
+        }
       });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
@@ -47,13 +56,17 @@ function Login() {
       password: "",
     },
     onSubmit: async (values) => {
+      handleToggle();
       await axios
         .post(`${process.env.REACT_APP_API_LOGIN}`, {
           email: values.username,
           password: values.password,
         })
         .then((res) => {
+          handleClose();
+          dispatch(userLogin(res.data));
           history.push("/");
+
           // hideLoader();
           // if (res.data.authenticated === true) {
           //   const token = {
@@ -74,7 +87,6 @@ function Login() {
 
   return (
     <form action="#" className="sign-in-form" onSubmit={formik.handleSubmit}>
-      <PageLoading />
       <h2 className="title">Sign in</h2>
       <div className="input-field">
         <AccountCircle />

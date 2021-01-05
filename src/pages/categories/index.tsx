@@ -1,5 +1,4 @@
-import { Radio } from "@material-ui/core";
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import Course from "../../components/course";
 import FilterCourse from "../../components/filter-course";
@@ -7,9 +6,9 @@ import FilterCourse from "../../components/filter-course";
 import "./styles.css";
 
 export default function CategoryDetails() {
-  let { courseName }: { courseName: string } = useParams();
-  console.log(courseName);
-  const rates = [4.5, 4, 3.5, 3];
+  let { categoryName }: { categoryName: string } = useParams();
+  console.log(categoryName);
+  // const rates = [4.5, 4, 3.5, 3];
   const course = {
     imgUrl:
       "https://img-a.udemycdn.com/course/240x135/950390_270f_3.jpg?yytG3JZ7tYO72YREFLuJZFmzcVBR1tht6FhV7r20dE1cYJI0EmPQGP5Q_UJXbjnNVdrVKCFtylxND-SIeZhKp5viPP0VHThFLzlO98p1Fc1J9rpF58mDvLro--5NB3Y",
@@ -23,7 +22,7 @@ export default function CategoryDetails() {
     discount: 0.8,
   };
 
-  const [courses, setCourses] = useState(course);
+  // const [courses, setCourses] = useState(course);
   const changeCourse = (rating: number) => {
     //change course follow rating value
     console.log("change course" + rating);

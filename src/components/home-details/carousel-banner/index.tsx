@@ -16,7 +16,7 @@ SwiperCore.use([Pagination]);
 SwiperCore.use([Autoplay]);
 SwiperCore.use([EffectFade]);
 
-export default function CarouselBanner() {
+export default function CarouselBanner({ courses }: { courses: any }) {
   return (
     <Swiper
       id="swiper-color"

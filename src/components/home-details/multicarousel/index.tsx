@@ -15,6 +15,7 @@ import HoverRating from "../../course-details/rating";
 import { Button } from "@material-ui/core";
 import { ArrowBackIos } from "@material-ui/icons";
 import { formatNumber } from "../../../helpers/formatNumber";
+import { useHistory } from "react-router-dom";
 
 SwiperCore.use([Navigation]);
 SwiperCore.use([Pagination]);
@@ -22,6 +23,11 @@ SwiperCore.use([Autoplay]);
 SwiperCore.use([EffectFade]);
 
 export default function MultiCarousel() {
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push("/category/web/1");
+  };
   return (
     <div className="multicarousel">
       <h2 className="most-view">Most View</h2>
@@ -43,7 +49,7 @@ export default function MultiCarousel() {
         {Array.from(Array(10)).map((el, i) => {
           return (
             <SwiperSlide key={`slide-${i}`}>
-              <div className="multicarousel-content">
+              <div className="multicarousel-content" onClick={handleClick}>
                 <img
                   src={`https://picsum.photos/id/${i + 1}/120/150`}
                   alt={`Slide ${i}`}

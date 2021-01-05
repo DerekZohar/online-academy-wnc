@@ -15,7 +15,13 @@ import {
 } from "@material-ui/icons";
 import { signInWithGithub, signInWithGoogle } from "../../../services/firebase";
 
-export default function SignOut() {
+export default function SignOut({
+  handleToggle,
+  handleClose,
+}: {
+  handleToggle: any;
+  handleClose: any;
+}) {
   const formik = useFormik({
     initialValues: {
       username: "",
