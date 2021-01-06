@@ -90,6 +90,23 @@ export const NavBtnLink = styled(Link)`
     color: #fff;
   }
 `;
+export const NavBtnLinkOutLine = styled(Link)`
+  padding-right: 10px;
+  color: #1854b4;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+
+  /* Second Nav */
+  // margin-left: 24px;
+
+  // &:hover {
+  //   transition: all 0.2s ease-in-out;
+  //   background: ##999999;
+  //   color: #1854b4;
+  // }
+`;
 
 export default function Navbar() {
   // const [dataSrc, setDataSrc] = useState({
@@ -99,7 +116,8 @@ export default function Navbar() {
   const user = useSelector((state: any) => state.user.value);
   const isLogin = user.token ? true : false;
   const location = useLocation();
-  if (location.pathname === "/login") return null;
+  if (location.pathname === "/login" || location.pathname === "/sign-out")
+    return null;
   return (
     <Nav>
       <NavLink to="/">
@@ -124,9 +142,7 @@ export default function Navbar() {
 
         {!isLogin ? (
           <div className="sign-in-log-out">
-            <Button href="/sign-out" color="primary">
-              Sign Out
-            </Button>
+            <NavBtnLinkOutLine to="/sign-out">Sign Out</NavBtnLinkOutLine>
             <NavBtnLink to="/login">Sign In</NavBtnLink>
           </div>
         ) : (

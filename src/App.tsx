@@ -36,7 +36,7 @@ function App() {
         <Route path="/login">
           <LoginPage login={true} />
         </Route>
-        <Route path="/signout">
+        <Route path="/sign-out">
           <LoginPage login={false} />
         </Route>
         <Route path={`/category/web/:webId`}>

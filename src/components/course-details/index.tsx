@@ -66,14 +66,14 @@ export default function CourseDetail() {
         "The course also includes comments and tips from Bjarne Stroustrup - the original designer of Python.",
       ],
     },
-    timeline: "24:10",
-    skillLv: "Intermediate",
-    includedInProduct: [
-      "Rich Learning Content",
-      "Taught by Industry Pros",
-      "Interactive Quizzes",
-      "Self-Paced Learning",
-    ],
+    // timeline: "24:10",
+    // skillLv: "Intermediate",
+    // includedInProduct: [
+    //   "Rich Learning Content",
+    //   "Taught by Industry Pros",
+    //   "Interactive Quizzes",
+    //   "Self-Paced Learning",
+    // ],
     rating: {
       rateNum: 4.6,
       studentRateNum: 333905,
@@ -218,16 +218,16 @@ export default function CourseDetail() {
                 </div>
               </div>
             </div>
-            <div>
+            {/* <div>
               <p className={styles.descriptions_title}>TIMELINE</p>
               <p>{course.timeline}</p>
             </div>
             <div>
               <p className={styles.descriptions_title}>SKILL LEVEL</p>
               <p>{course.skillLv}</p>
-            </div>
+            </div> */}
           </div>
-          <div className={styles.included_in_product}>
+          {/* <div className={styles.included_in_product}>
             <p className={styles.descriptions_title}>INCLUDED IN PRODUCT</p>
             <GridList cellHeight={28} className={classes.gridList} cols={2}>
               {course.includedInProduct.map((item, index) => (
@@ -236,7 +236,7 @@ export default function CourseDetail() {
                 </GridListTile>
               ))}
             </GridList>
-          </div>
+          </div> */}
         </div>
       </div>
 

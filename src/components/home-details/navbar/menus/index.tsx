@@ -7,6 +7,7 @@ import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import NestedList from "./menu";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,6 +23,7 @@ export default function MenuListComposition() {
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
   const handleToggle = () => {
+    console.log(12312312312);
     setOpen((prevOpen) => !prevOpen);
   };
 
@@ -71,28 +73,7 @@ export default function MenuListComposition() {
         disablePortal
         style={{ position: "absolute" }}
       >
-        {({ TransitionProps, placement }) => (
-          <Grow
-            {...TransitionProps}
-            style={{
-              transformOrigin:
-                placement === "bottom" ? "center top" : "center bottom",
-            }}
-          >
-            <Paper>
-              <ClickAwayListener onClickAway={handleClose}>
-                <MenuList
-                  autoFocusItem={open}
-                  id="menu-list-grow"
-                  onKeyDown={handleListKeyDown}
-                >
-                  <MenuItem onClick={handleClose}>Web</MenuItem>
-                  <MenuItem onClick={handleClose}>Mobile</MenuItem>
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </Grow>
-        )}
+        <NestedList />
       </Popper>
     </div>
   );
