@@ -70,6 +70,10 @@ export default function AvatarUser() {
     prevOpen.current = open;
   }, [open]);
 
+  const handleEditProfile = () => {
+    history.push("/edit-profile")
+  }
+
   return (
     <div className={classes.root}>
       {/* <Avatar
@@ -122,7 +126,7 @@ export default function AvatarUser() {
                   <MenuItem onClick={handleClose}>My learning</MenuItem>
                   <hr />
                   <MenuItem onClick={handleClose}>Public Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>Edit Profile</MenuItem>
+                  <MenuItem onClick={handleEditProfile}>Edit Profile</MenuItem>
                   <hr />
                   <MenuItem onClick={handleLogOut}>Log out</MenuItem>
                 </MenuList>

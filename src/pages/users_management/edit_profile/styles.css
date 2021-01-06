@@ -1,0 +1,20 @@
+.iconButton {
+	border: none;
+	outline: none;
+	cursor: pointer;
+	margin-left: 20px;
+	background-color: white;
+}
+
+.flex {
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.Container {
+    display: flex;
+    flex-direction: column;
+	justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+}
