@@ -18,12 +18,16 @@ export const loginSlice = createSlice({
         },
         userLogout:(state, action)=>{
             setNull(state.value);
+        },
+        changeFirstName: (state, action) => {
+            state.value = { ...state.value, ...action.payload }
+            console.log(action.payload)
         }
         
         
     },
 });
 
-export const { initValue,userLogin,userLogout } = loginSlice.actions;
+export const { initValue,userLogin,userLogout,changeFirstName } = loginSlice.actions;
 
 export default loginSlice.reducer;

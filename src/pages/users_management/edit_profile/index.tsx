@@ -10,6 +10,9 @@ import EditIcon from '@material-ui/icons/Create';
 import './styles.css';
 import { Avatar } from '@material-ui/core';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { changeFirstName } from '../../login/loginSlice';
+import Axios from 'axios';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -29,12 +32,23 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Profile() {
 	const classes = useStyles();
 	const user = useSelector((state: any) => state.user.value);
-	console.log(user);
-
+	const dispatch = useDispatch();
+	var tempFirstName = '';
+	var tempLastName = '';
 	const [ firstNameOpen, setFirstNameOpen ] = useState(false);
 	const [ lastNameOpen, setLastNameOpen ] = useState(false);
 	const [ emailOpen, setEmailOpen ] = useState(false);
 	const [ passOpen, setPassOpen ] = useState(false);
+	const [ currentFirstName, setCurrentFirstName ] = useState(user.firstName);
+	const [ currentLastName, setCurrentLastName ] = useState(user.lastName);
+
+	const FirstNameChange = (e: any) => {
+		tempFirstName = e.target.value;
+	};
+
+	const LastNameChange = (e: any) => {
+		tempLastName = e.target.value;
+	};
 
 	const handleFirstNameOpen = () => {
 		setFirstNameOpen(true);
@@ -42,17 +56,43 @@ export default function Profile() {
 
 	const handleFirstNameClose = () => {
 		setFirstNameOpen(false);
-    };
-    
-    const handleFirstNameOk = () => {
-        
-    };
+	};
+
+	const handleFirstNameOk = async () => {
+		console.log(user.id);
+		console.log(tempFirstName);
+		await Axios.put(
+			'http://localhost:3000/api/user',
+			{
+				firstName: tempFirstName,
+				userId: user.id
+			},
+			{
+				headers: {
+					Authorization: 'Bearer ' + user.token
+				}
+			}
+		)
+			.then((res) => {
+				setCurrentFirstName(tempFirstName);
+				dispatch(changeFirstName({ firstName: tempFirstName }));
+				setFirstNameOpen(false);
+			})
+			.catch((error) => {});
+	};
 
 	const handleLastNameOpen = () => {
 		setLastNameOpen(true);
 	};
 
 	const handleLastNameClose = () => {
+		setLastNameOpen(false);
+	};
+
+	const handleLastNameOk = async () => {
+		setCurrentLastName(tempLastName);
+		dispatch(changeFirstName({ lastName: tempLastName }));
+		// await Axios.put('http://localhost:3000/api/user')
 		setLastNameOpen(false);
 	};
 
@@ -81,7 +121,7 @@ export default function Profile() {
 					InputProps={{
 						readOnly: true
 					}}
-					value={user.firstName}
+					value={currentFirstName}
 				/>
 				<button className="iconButton" onClick={handleFirstNameOpen}>
 					<EditIcon />
@@ -89,7 +129,14 @@ export default function Profile() {
 				<Dialog open={firstNameOpen} onClose={handleFirstNameClose} aria-labelledby="form-dialog-title">
 					<DialogTitle>Edit First Name</DialogTitle>
 					<DialogContent>
-						<TextField autoFocus margin="dense" label="New first name" fullWidth />
+						<TextField
+							onChange={FirstNameChange}
+							defaultValue={currentFirstName}
+							autoFocus
+							margin="dense"
+							label="New first name"
+							fullWidth
+						/>
 					</DialogContent>
 					<DialogActions>
 						<Button onClick={handleFirstNameClose} color="primary">
@@ -107,7 +154,7 @@ export default function Profile() {
 					InputProps={{
 						readOnly: true
 					}}
-					value={user.lastName}
+					value={currentLastName}
 				/>
 				<button className="iconButton" onClick={handleLastNameOpen}>
 					<EditIcon />
@@ -115,13 +162,20 @@ export default function Profile() {
 				<Dialog open={lastNameOpen} onClose={handleLastNameClose} aria-labelledby="form-dialog-title">
 					<DialogTitle>Edit Last Name</DialogTitle>
 					<DialogContent>
-						<TextField autoFocus margin="dense" label="New last name" fullWidth />
+						<TextField
+							onChange={LastNameChange}
+							defaultValue={currentLastName}
+							autoFocus
+							margin="dense"
+							label="New last name"
+							fullWidth
+						/>
 					</DialogContent>
 					<DialogActions>
 						<Button onClick={handleLastNameClose} color="primary">
 							Cancel
 						</Button>
-						<Button onClick={handleLastNameClose} color="primary">
+						<Button onClick={handleLastNameOk} color="primary">
 							OK
 						</Button>
 					</DialogActions>
