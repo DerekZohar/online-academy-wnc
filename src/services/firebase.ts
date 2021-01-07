@@ -47,12 +47,25 @@ export const signInWithGoogle = async () => {
 export const signInWithGithub = async () => {
   var provider = new firebase.auth.GithubAuthProvider();
   let check = false;
-
+  let userInfo = {};
   await firebase
     .auth()
     .signInWithPopup(provider)
     .then(function (result) {
-      console.log(result)
+      const credential = result.credential as firebase.auth.OAuthCredential;
+      // console.log(credential.accessToken)
+      
+      var user = result.user;
+      // console.log(user);
+
+      userInfo = {
+        email: user?.email,
+        firstName: user?.displayName,
+        lastName: "",
+        roleId: 1,
+        token: credential.accessToken,
+        avatarUrl: user?.photoURL,
+      };
       check = true;
     })
     .catch(function (error) {
@@ -60,7 +73,10 @@ export const signInWithGithub = async () => {
       console.log("signInWithGithub fail");
     });
 
-  return check;
+  return {
+    isSuccess: check,
+    user: {...userInfo}
+  };;
 
 };
 

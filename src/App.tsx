@@ -16,6 +16,9 @@ import Navbar from "./components/home-details/navbar";
 import PageNotFound from "./pages/page-not-found";
 import CourseDetail from "./components/course-details";
 import ScrollToTop from "./components/scroll-to-top";
+import { checkObjEmpty } from "./helpers/checkObjEmpty";
+import { userLogin } from "./pages/login/loginSlice";
+import { useDispatch } from "react-redux";
 
 function App() {
   if (!firebase.apps.length) {
@@ -24,7 +27,16 @@ function App() {
     firebase.app(); // if already initialized, use that one
   }
   const history = useHistory();
+  const userInfo = localStorage.getItem("userInfo")
+    ? localStorage.getItem("userInfo")
+    : "";
+  const dispatch = useDispatch();
 
+  console.log(checkObjEmpty(userInfo));
+  if (checkObjEmpty(userInfo) === false) {
+    dispatch(userLogin(JSON.parse(userInfo || "{}")));
+    // history.push("/");
+  }
   return (
     <Router>
       <ScrollToTop />

@@ -10,7 +10,8 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Avatar, IconButton } from "@material-ui/core";
 import { logOut } from "../../../../services/firebase";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { initValue } from "../../../../pages/login/loginSlice";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function AvatarUser() {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const user = useSelector((state: any) => state.user.value);
   const [open, setOpen] = React.useState(false);
@@ -47,9 +49,9 @@ export default function AvatarUser() {
     setOpen(false);
   };
   const handleLogOut = async () => {
-    console.log(132);
-
-    await logOut();
+    if (!user.verified) await logOut();
+    dispatch(initValue(1));
+    localStorage.removeItem("userInfo");
     //update state of redux
     // history.push("/login");
   };

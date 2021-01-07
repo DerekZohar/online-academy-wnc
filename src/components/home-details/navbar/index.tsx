@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles.css";
 // import { FaBars } from "react-icons/fa";
-import { NavLink as Link, useLocation } from "react-router-dom";
+import { NavLink as Link, useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../../../assets/logo.svg";
 import SearchBar from "material-ui-search-bar";
@@ -9,7 +9,9 @@ import MenuListComposition from "./menus";
 import AvatarUser from "./avatar";
 import { Avatar, Button } from "@material-ui/core";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { checkObjEmpty } from "../../../helpers/checkObjEmpty";
+import { userLogin } from "../../../pages/login/loginSlice";
 export const Nav = styled.nav`
   background: #fff;
   height: 80px;
@@ -112,12 +114,15 @@ export default function Navbar() {
   // const [dataSrc, setDataSrc] = useState({
   //   dataSource: ["abc", "a", "abcdqwe"],
   // });
+  const history = useHistory();
 
   const user = useSelector((state: any) => state.user.value);
   const isLogin = user.token ? true : false;
   const location = useLocation();
+
   if (location.pathname === "/login" || location.pathname === "/sign-out")
     return null;
+
   return (
     <Nav>
       <NavLink to="/">

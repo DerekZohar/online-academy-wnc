@@ -14,7 +14,10 @@ import {
   Theme,
 } from "@material-ui/core";
 import Axios from "axios";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { checkObjEmpty } from "../../helpers/checkObjEmpty";
+import { userLogin } from "./loginSlice";
 // import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -41,6 +44,16 @@ export default function LoginPage({ login }: { login: any }) {
     setOpen(!open);
   };
 
+  // const user = useSelector((state: any) => state.user.value);
+  const dispatch = useDispatch();
+  const userInfo = localStorage.getItem("userInfo")
+    ? localStorage.getItem("userInfo")
+    : "";
+  console.log(checkObjEmpty(userInfo));
+  if (checkObjEmpty(userInfo) === false) {
+    dispatch(userLogin(JSON.parse(userInfo || "{}")));
+    history.push("/");
+  }
   if (!isLogin) {
     return (
       <div className="container sign-up-mode">
@@ -67,6 +80,11 @@ export default function LoginPage({ login }: { login: any }) {
                 className="btn transparent"
                 id="sign-up-btn"
                 onClick={() => {
+                  window.history.replaceState(
+                    null,
+                    "New Page Title",
+                    "/sign-out"
+                  );
                   setIsLogin(false);
                 }}
               >

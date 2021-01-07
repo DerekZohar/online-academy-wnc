@@ -14,10 +14,13 @@ export default function SocialMedia() {
     const value = await signInWithGoogle();
     value.isSuccess && history.push("/");
     dispatch(userLogin(value.user));
+    localStorage.setItem("userInfo", JSON.stringify(value.user));
   };
-  const signInWithGH = () => {
-    const value = signInWithGithub();
-    // value.isSuccess && history.push("/");
+  const signInWithGH = async () => {
+    const value = await signInWithGithub();
+    value.isSuccess && history.push("/");
+    dispatch(userLogin(value.user));
+    localStorage.setItem("userInfo", JSON.stringify(value.user));
   };
   return (
     <div className="social-media">

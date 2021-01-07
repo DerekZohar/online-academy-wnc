@@ -65,6 +65,7 @@ function Login({
         .then((res) => {
           handleClose();
           dispatch(userLogin(res.data));
+          localStorage.setItem("userInfo", JSON.stringify(res.data));
           history.push("/");
 
           // hideLoader();
