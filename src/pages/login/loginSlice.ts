@@ -19,7 +19,7 @@ export const loginSlice = createSlice({
         userLogout:(state, action)=>{
             setNull(state.value);
         },
-        changeFirstName: (state, action) => {
+        editUser: (state, action) => {
             state.value = { ...state.value, ...action.payload }
             console.log(action.payload)
         }
@@ -28,6 +28,6 @@ export const loginSlice = createSlice({
     },
 });
 
-export const { initValue,userLogin,userLogout,changeFirstName } = loginSlice.actions;
+export const { initValue,userLogin,userLogout,editUser } = loginSlice.actions;
 
 export default loginSlice.reducer;

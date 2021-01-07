@@ -74,6 +74,14 @@ export default function AvatarUser() {
     history.push("/edit-profile")
   }
 
+  const handleWatchList = () => {
+    history.push('/watchlist')
+  }
+
+  const handleMyCourse = () => {
+    history.push('/my-course')
+  }
+
   return (
     <div className={classes.root}>
       {/* <Avatar
@@ -122,8 +130,8 @@ export default function AvatarUser() {
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>Watch List</MenuItem>
-                  <MenuItem onClick={handleClose}>My learning</MenuItem>
+                  <MenuItem onClick={handleWatchList}>Watch List</MenuItem>
+                  <MenuItem onClick={handleMyCourse}>My learning</MenuItem>
                   <hr />
                   <MenuItem onClick={handleClose}>Public Profile</MenuItem>
                   <MenuItem onClick={handleEditProfile}>Edit Profile</MenuItem>

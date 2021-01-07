@@ -11,8 +11,9 @@ import './styles.css';
 import { Avatar } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { changeFirstName } from '../../login/loginSlice';
+import { editUser } from '../../login/loginSlice';
 import Axios from 'axios';
+import CategoryDetails from "../../categories";
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -59,26 +60,29 @@ export default function Profile() {
 	};
 
 	const handleFirstNameOk = async () => {
-		console.log(user.id);
-		console.log(tempFirstName);
-		await Axios.put(
-			'http://localhost:3000/api/user',
-			{
-				firstName: tempFirstName,
-				userId: user.id
-			},
-			{
-				headers: {
-					Authorization: 'Bearer ' + user.token
+		if (tempFirstName === "") {
+			setFirstNameOpen(false);
+		}
+		else {
+			await Axios.put(
+				'http://localhost:3000/api/user',
+				{
+					firstName: tempFirstName,
+					userId: user.id
+				},
+				{
+					headers: {
+						Authorization: 'Bearer ' + user.token
+					}
 				}
-			}
-		)
-			.then((res) => {
-				setCurrentFirstName(tempFirstName);
-				dispatch(changeFirstName({ firstName: tempFirstName }));
-				setFirstNameOpen(false);
-			})
-			.catch((error) => {});
+			)
+				.then((res) => {
+					setCurrentFirstName(tempFirstName);
+					dispatch(editUser({ firstName: tempFirstName }));
+					setFirstNameOpen(false);
+				})
+				.catch((error) => {alert(error)});
+		}
 	};
 
 	const handleLastNameOpen = () => {
@@ -90,10 +94,29 @@ export default function Profile() {
 	};
 
 	const handleLastNameOk = async () => {
-		setCurrentLastName(tempLastName);
-		dispatch(changeFirstName({ lastName: tempLastName }));
-		// await Axios.put('http://localhost:3000/api/user')
-		setLastNameOpen(false);
+		if (tempLastName === "") {
+			setLastNameOpen(false);
+		}
+		else {
+			await Axios.put(
+				'http://localhost:3000/api/user',
+				{
+					lastName: tempLastName,
+					userId: user.id
+				},
+				{
+					headers: {
+						Authorization: 'Bearer ' + user.token
+					}
+				}
+			)
+				.then((res) => {
+					setCurrentLastName(tempLastName);
+					dispatch(editUser({ lastName: tempLastName }));
+					setLastNameOpen(false);
+				})
+				.catch((error) => {alert(error)});
+		}
 	};
 
 	const handleEmailOpen = () => {
