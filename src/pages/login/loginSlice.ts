@@ -24,11 +24,15 @@ export const loginSlice = createSlice({
             console.log(action.payload)
             state.value.watchList.push(action.payload);
             state.value = {...state.value};
+        },
+        editUser: (state, action) => {
+            state.value = { ...state.value, ...action.payload }
+            console.log(action.payload)
         }
         
     },
 });
 
-export const { initValue,userLogin,userLogout,addFavCourse } = loginSlice.actions;
+export const { initValue,userLogin,userLogout,addFavCourse,editUser } = loginSlice.actions;
 
 export default loginSlice.reducer;
