@@ -1,0 +1,14 @@
+.course-item {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5em;
+
+  padding: 16px;
+  border: 1px solid #dedfe0;
+  cursor: pointer;
+}
+.course-item:hover {
+  background-color: #dedfe0;
+}

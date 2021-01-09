@@ -18,6 +18,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { checkObjEmpty } from "../../helpers/checkObjEmpty";
 import { userLogin } from "./loginSlice";
+import CustomizedSnackbars from "../../components/login-container/alert-error";
 // import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -54,6 +55,7 @@ export default function LoginPage({ login }: { login: any }) {
     dispatch(userLogin(JSON.parse(userInfo || "{}")));
     history.push("/");
   }
+
   if (!isLogin) {
     return (
       <div className="container sign-up-mode">
@@ -63,6 +65,7 @@ export default function LoginPage({ login }: { login: any }) {
             <SignOut handleToggle={handleToggle} handleClose={handleClose} />
           </div>
         </div>
+
         <Backdrop
           className={classes.backdrop}
           open={open}
@@ -122,6 +125,7 @@ export default function LoginPage({ login }: { login: any }) {
           <SignOut handleToggle={handleToggle} handleClose={handleClose} />
         </div>
       </div>
+
       <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
         <CircularProgress />
       </Backdrop>

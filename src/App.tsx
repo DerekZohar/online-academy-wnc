@@ -19,6 +19,7 @@ import ScrollToTop from "./components/scroll-to-top";
 import { checkObjEmpty } from "./helpers/checkObjEmpty";
 import { userLogin } from "./pages/login/loginSlice";
 import { useDispatch } from "react-redux";
+import LearnCourse from "./pages/learn-course";
 
 function App() {
   if (!firebase.apps.length) {
@@ -57,6 +58,8 @@ function App() {
         <Route path={`/category/:categoryName`}>
           <CategoryDetails />
         </Route>
+
+        <Route path={"/user/learning"} component={LearnCourse} />
         <Route component={PageNotFound} />
       </Switch>
     </Router>

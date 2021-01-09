@@ -11,12 +11,14 @@ import {
   signInWithGithub,
   signInWithGoogle,
 } from "../../../services/firebase";
-import { Button, IconButton } from "@material-ui/core";
+import { Button, IconButton, Snackbar } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import useFullPageLoader from "../../../hooks/usePageLoader";
 import PageLoading from "../../loading";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../../pages/login/loginSlice";
+import CustomizedSnackbars from "../alert-error";
+import Alert from "@material-ui/lab/Alert";
 
 function Login({
   handleToggle,
@@ -31,6 +33,18 @@ function Login({
   const history = useHistory();
   const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
 
+  const [openSB, setOpenSB] = useState(false);
+  const handleClickSB = () => {
+    setOpenSB(true);
+  };
+
+  const handleCloseSB = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSB(false);
+  };
   // Listen to the Firebase Auth state and set the local state.
   useEffect(() => {
     logOut();
@@ -82,7 +96,10 @@ function Login({
           // }
           console.log("login success");
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          handleClose();
+          handleClickSB();
+        });
     },
   });
 
@@ -111,9 +128,19 @@ function Login({
       </div>
       {/* {loader} */}
       <Button color="primary">Forgot password?</Button>
-      <input type="submit" defaultValue="Login" className="btn solid" />
+      <input
+        type="submit"
+        defaultValue="Login"
+        className="btn solid"
+        // onClick={handleClickSB}
+      />
       <p className="social-text">Or Sign in with social platforms</p>
       <SocialMedia></SocialMedia>
+      <Snackbar open={openSB} autoHideDuration={6000} onClose={handleCloseSB}>
+        <Alert onClose={handleCloseSB} severity="error">
+          Login fail! Please login again!
+        </Alert>
+      </Snackbar>
     </form>
   );
 }
