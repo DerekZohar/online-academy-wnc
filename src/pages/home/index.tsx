@@ -3,6 +3,7 @@ import CarouselTopic from "../../components/home-details/carousel-topic";
 import MultiCarousel from "../../components/home-details/multicarousel";
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import Drawer from '../admin/course-management'
 
 export default function HomePage() {
   const [courseCB, setcourseCB] = useState([]);
@@ -20,6 +21,7 @@ export default function HomePage() {
       <MultiCarousel />
       <CarouselTopic />
       <MultiCarousel />
+      <Drawer></Drawer>
     </div>
   );
 }
