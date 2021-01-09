@@ -72,6 +72,9 @@ export default function AvatarUser() {
     prevOpen.current = open;
   }, [open]);
 
+  const handleWatchList = () => {
+    history.push("/user/watchlist");
+  };
   return (
     <div className={classes.root}>
       {/* <Avatar
@@ -120,7 +123,7 @@ export default function AvatarUser() {
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>Watch List</MenuItem>
+                  <MenuItem onClick={handleWatchList}>Watch List</MenuItem>
                   <MenuItem onClick={handleClose}>My learning</MenuItem>
                   <hr />
                   <MenuItem onClick={handleClose}>Public Profile</MenuItem>

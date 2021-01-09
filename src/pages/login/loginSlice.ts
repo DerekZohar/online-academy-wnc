@@ -5,7 +5,8 @@ export const loginSlice = createSlice({
     name: 'loginSlice',
     initialState: {
         value: {
-            avatarUrl:""
+            avatarUrl:"",
+            watchList:[],
         }
     },
     reducers: {
@@ -13,17 +14,21 @@ export const loginSlice = createSlice({
             setNull(state.value);
         },
         userLogin:(state, action) => {
-            console.log(action.payload)
+            // console.log(action.payload)
             state.value = {...state.value, ...action.payload};
         },
         userLogout:(state, action)=>{
             setNull(state.value);
+        },
+        addFavCourse:(state: any, action: any)=>{
+            console.log(action.payload)
+            state.value.watchList.push(action.payload);
+            state.value = {...state.value};
         }
-        
         
     },
 });
 
-export const { initValue,userLogin,userLogout } = loginSlice.actions;
+export const { initValue,userLogin,userLogout,addFavCourse } = loginSlice.actions;
 
 export default loginSlice.reducer;

@@ -1,6 +1,8 @@
 import {
   Button,
+  Checkbox,
   createStyles,
+  FormControlLabel,
   GridList,
   GridListTile,
   makeStyles,
@@ -17,6 +19,9 @@ import CourseGroup from "../../components/course-details/course-group";
 
 import { formatNumber } from "../../helpers/formatNumber";
 import styles from "./styles.module.css";
+import { Favorite, FavoriteBorder, FavoriteOutlined } from "@material-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavCourse } from "../../pages/login/loginSlice";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,7 +58,10 @@ export default function CourseDetail() {
   const classes = useStyles();
   let { webId }: { webId: string } = useParams();
   console.log(webId);
+
+  const user = useSelector((state: any) => state.user.value);
   const course = {
+    id: "123",
     cost: 100,
     title: "Python Programmers",
     summary: "Learn features and constructs for Python",
@@ -145,6 +153,15 @@ export default function CourseDetail() {
     ],
   };
 
+  const [checkBox, setCheckBox] = React.useState(false);
+  const dispatch = useDispatch();
+  const handleCheckBox = () => {
+    if (user.token) {
+      console.log(course.id);
+      dispatch(addFavCourse({ id: course.id }));
+      setCheckBox(!checkBox);
+    }
+  };
   return (
     <div>
       <div className={styles.banner}>
@@ -179,6 +196,18 @@ export default function CourseDetail() {
           >
             Enroll This Course
           </Button>
+          <FormControlLabel
+            control={
+              <Checkbox
+                icon={<FavoriteBorder />}
+                checkedIcon={<Favorite />}
+                name="checkedH"
+                checked={checkBox}
+                onClick={handleCheckBox}
+              />
+            }
+            label=""
+          />
         </div>
         <img
           src="https://images.idgesg.net/images/article/2019/03/c-plus-plus_code-100790020-large.jpg"

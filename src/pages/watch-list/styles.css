@@ -1,0 +1,12 @@
+.watch-list {
+  margin-top: 80px;
+}
+.MuiPagination-ul {
+  margin: 0;
+  display: flex;
+  padding: 0;
+  flex-wrap: wrap;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+}
