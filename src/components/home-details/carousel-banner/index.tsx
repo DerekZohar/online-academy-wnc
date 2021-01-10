@@ -10,6 +10,7 @@ import "./styles.css";
 import "swiper/swiper-bundle.css";
 import "swiper/components/pagination/pagination.scss";
 import HoverRating from "../../course-details/rating";
+import { useHistory } from "react-router-dom";
 
 SwiperCore.use([Navigation]);
 SwiperCore.use([Pagination]);
@@ -17,6 +18,10 @@ SwiperCore.use([Autoplay]);
 SwiperCore.use([EffectFade]);
 
 export default function CarouselBanner({ courses }: { courses: any }) {
+  const history = useHistory();
+  const handleClick = () => {
+    history.push("/category/web/1");
+  };
   return (
     <Swiper
       id="swiper-color"
@@ -39,7 +44,12 @@ export default function CarouselBanner({ courses }: { courses: any }) {
         return (
           <SwiperSlide
             key={`slide-${i}`}
-            style={{ listStyle: "none", display: "relative" }}
+            style={{
+              listStyle: "none",
+              display: "relative",
+              cursor: "pointer",
+            }}
+            onClick={handleClick}
           >
             <div className="slide-container">
               <img

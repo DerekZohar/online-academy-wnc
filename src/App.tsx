@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import LearnCourse from "./pages/learn-course";
 import WatchList from "./pages/watch-list";
 import Profile from "./pages/profile";
+import SearchPage from "./pages/search";
 
 function App() {
   if (!firebase.apps.length) {
@@ -60,6 +61,7 @@ function App() {
         <Route path={`/category/:categoryName`}>
           <CategoryDetails />
         </Route>
+        <Route path={"/search/:searchName"} component={SearchPage} />
 
         <Route path={"/user/learning"} component={LearnCourse} />
         <Route path={"/user/watchlist"} component={WatchList} />

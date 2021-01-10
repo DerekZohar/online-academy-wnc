@@ -74,7 +74,7 @@ export default function SignOut({
         lastName: values.lastName,
         email: values.email,
         roleId: 1,
-        birthDate: "selectedDate",
+        birthDate: selectedDate?.toString(),
         password: values.password,
       };
       console.log(userDataToPost);
@@ -83,7 +83,7 @@ export default function SignOut({
         .then((res) => {
           // const container = document.querySelector(".container");
           // container !== null && container.classList.remove("sign-up-mode");
-          console.log(res.data);
+          console.log(userDataToPost);
           setOpen(true);
           //TO-DO
           //redirect login page
@@ -103,6 +103,7 @@ export default function SignOut({
   const handleCloseOtp = () => {
     setOpen(false);
   };
+  //add api for otp dialog
   return (
     <form action="#" className="sign-up-form" onSubmit={formik.handleSubmit}>
       <h2 className="title">Sign up</h2>

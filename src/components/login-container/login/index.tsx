@@ -82,19 +82,7 @@ function Login({
           localStorage.setItem("userInfo", JSON.stringify(res.data));
           history.push("/");
 
-          // hideLoader();
-          // if (res.data.authenticated === true) {
-          //   const token = {
-          //     accessToken: res.data.accessToken,
-          //     refreshToken: res.data.refreshToken,
-          //   };
-          //   localStorage.setItem("sakilaToken", JSON.stringify(token));
-          //   handleLogin({ token });
-          //   history.push("/actors");
-          // } else {
-          //   alert("Login failed.");
-          // }
-          console.log("login success");
+          // console.log("login success");
         })
         .catch((error) => {
           handleClose();

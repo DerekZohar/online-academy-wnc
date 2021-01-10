@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 // import { FaBars } from "react-icons/fa";
 import { NavLink as Link, useHistory, useLocation } from "react-router-dom";
@@ -12,6 +12,7 @@ import { Avatar, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { checkObjEmpty } from "../../../helpers/checkObjEmpty";
 import { userLogin } from "../../../pages/login/loginSlice";
+import Axios from "axios";
 
 export const Nav = styled.nav`
   background: #fff;
