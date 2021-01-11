@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFavCourse } from "../../pages/login/loginSlice";
 import Axios from "axios";
 import Course from "../../services/courseInterface";
+import { id } from "date-fns/esm/locale";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -198,7 +199,20 @@ export default function CourseDetail() {
   const dispatch = useDispatch();
   const handleCheckBox = async () => {
     // console.log(user.token);
-    console.log(courseId);
+
+    if (checkBox === true) {
+      await Axios.delete("http://localhost:3000/api/watchlist/" + courseId, {
+        headers: {
+          Authorization: "Bearer " + user.token,
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          setCheckBox(false);
+          dispatch(addFavCourse(courseId));
+          console.log("success");
+        }
+      });
+    }
     if (user.token) {
       await Axios.post(
         "http://localhost:3000/api/watchlist/" + courseId,
@@ -214,21 +228,16 @@ export default function CourseDetail() {
           setCheckBox(!checkBox);
         }
       });
-
-      // dispatch(addFavCourse(courseId));
-      // setCheckBox(!checkBox);
-      // console.log(user.watchList);
-
-      await Axios.get("http://localhost:3000/api/watchlist", {
-        headers: {
-          Authorization: "Bearer " + user.token,
-        },
-      }).then((res: any) => {
-        if (res.status === 200) {
-          localStorage.setItem("watchList", JSON.stringify(res.data));
-        }
-      });
     }
+    await Axios.get("http://localhost:3000/api/watchlist", {
+      headers: {
+        Authorization: "Bearer " + user.token,
+      },
+    }).then((res: any) => {
+      if (res.status === 200) {
+        localStorage.setItem("watchList", JSON.stringify(res.data));
+      }
+    });
   };
   // console.log(JSON.stringify(course) + "course");
 
