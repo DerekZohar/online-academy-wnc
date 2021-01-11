@@ -5,19 +5,12 @@ import "./styles.css";
 import SocialMedia from "../social-media";
 
 import firebase from "firebase";
-import { AccountCircle, GitHub, Lock, MailOutline } from "@material-ui/icons";
-import {
-  logOut,
-  signInWithGithub,
-  signInWithGoogle,
-} from "../../../services/firebase";
-import { Button, IconButton, Snackbar } from "@material-ui/core";
+import { AccountCircle, Lock } from "@material-ui/icons";
+import { logOut } from "../../../services/firebase";
+import { Button, Snackbar } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import useFullPageLoader from "../../../hooks/usePageLoader";
-import PageLoading from "../../loading";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../../pages/login/loginSlice";
-import CustomizedSnackbars from "../alert-error";
 import Alert from "@material-ui/lab/Alert";
 
 function Login({

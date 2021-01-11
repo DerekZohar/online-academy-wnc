@@ -8,7 +8,7 @@ import {
   makeStyles,
   Theme,
 } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import AuthorCard from "../../components/course-details/author-card";
@@ -22,6 +22,8 @@ import styles from "./styles.module.css";
 import { Favorite, FavoriteBorder, FavoriteOutlined } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavCourse } from "../../pages/login/loginSlice";
+import Axios from "axios";
+import Course from "../../services/courseInterface";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,134 +58,206 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function CourseDetail() {
   const classes = useStyles();
-  let { webId }: { webId: string } = useParams();
-  console.log(webId);
-
-  const user = useSelector((state: any) => state.user.value);
-  const course = {
-    id: "123",
-    cost: 100,
-    title: "Python Programmers",
-    summary: "Learn features and constructs for Python",
-    descriptions: {
-      title: "About this Course",
-      content: [
-        "Python for Programmers is designed for students who are familiar with a programming language and wish to learn Python.",
-        "This course focuses on 'how' as opposed to 'what'. For example, in the lesson on functions, we do not teach what a function is, but rather how to create a function in C++.",
-        "The lessons are taught by several different instructors who have used Python in their professional careers, so students get to experience different perspectives.",
-        "The course also includes comments and tips from Bjarne Stroustrup - the original designer of Python.",
-      ],
-    },
-    // timeline: "24:10",
-    // skillLv: "Intermediate",
-    // includedInProduct: [
-    //   "Rich Learning Content",
-    //   "Taught by Industry Pros",
-    //   "Interactive Quizzes",
-    //   "Self-Paced Learning",
-    // ],
-    rating: {
-      rateNum: 4.6,
-      studentRateNum: 333905,
-    },
-    studentNum: 1170294,
-    sale: 91,
-    lastUpdate: "1/1/2020",
-    relativeCourse: [
+  let { courseId }: { courseId: string } = useParams();
+  // console.log(courseId);
+  const [course, setCourse] = React.useState({
+    price: 0,
+    rating: 0,
+    discount: 0,
+    name: "",
+    teacherId: "",
+    categoryId: "",
+    subCategoryId: "5fecc976a705d61b5cf603cd",
+    samplePictures: [],
+    createdDate: "2021-01-07T04:53:17.899Z",
+    lastEdited: "2021-01-07T04:53:17.899Z",
+    feedback: [
       {
-        title: "Python Programmers",
-        rating: {
-          rateNum: 4.6,
-          studentRateNum: 333905,
-        },
-        studentNum: 1170294,
-        sale: 91,
-        lastUpdate: "1/1/2020",
-        timeline: "24:10",
-        price: 11.99,
-      },
-      {
-        title: "Python Programmers",
-        rating: {
-          rateNum: 4.6,
-          studentRateNum: 333905,
-        },
-        studentNum: 1170294,
-        sale: 91,
-        lastUpdate: "1/1/2020",
-        timeline: "24:10",
-        price: 11.99,
-      },
-      {
-        title: "Python Programmers",
-        rating: {
-          rateNum: 4.6,
-          studentRateNum: 333905,
-        },
-        studentNum: 1170294,
-        sale: 91,
-        lastUpdate: "1/1/2020",
-        timeline: "24:10",
-        price: 11.99,
-      },
-      {
-        title: "Python Programmers",
-        rating: {
-          rateNum: 4.6,
-          studentRateNum: 333905,
-        },
-        studentNum: 1170294,
-        sale: 91,
-        lastUpdate: "1/1/2020",
-        timeline: "24:10",
-        price: 11.99,
-      },
-      {
-        title: "Python Programmers",
-        rating: {
-          rateNum: 4.6,
-          studentRateNum: 333905,
-        },
-        studentNum: 1170294,
-        sale: 91,
-        lastUpdate: "1/1/2020",
-        timeline: "24:10",
-        price: 11.99,
+        feedbackHeader: "I love this course",
+        feedbackContent: "Good course",
+        rating: 5,
+        id: "5ffa8d2ecd35c634344df7f9",
       },
     ],
-  };
+    lessons: [],
+    description: "test",
+    overview: "test overview",
+    id: "",
+  });
 
-  const [checkBox, setCheckBox] = React.useState(false);
+  useEffect(() => {
+    async function fetchData() {
+      await Axios.get("http://localhost:3000/api/course/" + courseId).then(
+        (res) => {
+          setCourse(res.data);
+          // console.log(JSON.stringify(course) + "course");
+        }
+      );
+    }
+    fetchData();
+  }, []);
+
+  const user = useSelector((state: any) => state.user.value);
+  // const course = {
+  //   id: "123",
+  //   cost: 100,
+  //   title: "Python Programmers",
+  //   summary: "Learn features and constructs for Python",
+  //   descriptions: {
+  //     title: "About this Course",
+  //     content: [
+  //       "Python for Programmers is designed for students who are familiar with a programming language and wish to learn Python.",
+  //       "This course focuses on 'how' as opposed to 'what'. For example, in the lesson on functions, we do not teach what a function is, but rather how to create a function in C++.",
+  //       "The lessons are taught by several different instructors who have used Python in their professional careers, so students get to experience different perspectives.",
+  //       "The course also includes comments and tips from Bjarne Stroustrup - the original designer of Python.",
+  //     ],
+  //   },
+  //   // timeline: "24:10",
+  //   // skillLv: "Intermediate",
+  //   // includedInProduct: [
+  //   //   "Rich Learning Content",
+  //   //   "Taught by Industry Pros",
+  //   //   "Interactive Quizzes",
+  //   //   "Self-Paced Learning",
+  //   // ],
+  //   rating: {
+  //     rateNum: 4.6,
+  //     studentRateNum: 333905,
+  //   },
+  //   studentNum: 1170294,
+  //   sale: 91,
+  //   lastUpdate: "1/1/2020",
+  //   relativeCourse: [
+  //     {
+  //       title: "Python Programmers",
+  //       rating: {
+  //         rateNum: 4.6,
+  //         studentRateNum: 333905,
+  //       },
+  //       studentNum: 1170294,
+  //       sale: 91,
+  //       lastUpdate: "1/1/2020",
+  //       timeline: "24:10",
+  //       price: 11.99,
+  //     },
+  //     {
+  //       title: "Python Programmers",
+  //       rating: {
+  //         rateNum: 4.6,
+  //         studentRateNum: 333905,
+  //       },
+  //       studentNum: 1170294,
+  //       sale: 91,
+  //       lastUpdate: "1/1/2020",
+  //       timeline: "24:10",
+  //       price: 11.99,
+  //     },
+  //     {
+  //       title: "Python Programmers",
+  //       rating: {
+  //         rateNum: 4.6,
+  //         studentRateNum: 333905,
+  //       },
+  //       studentNum: 1170294,
+  //       sale: 91,
+  //       lastUpdate: "1/1/2020",
+  //       timeline: "24:10",
+  //       price: 11.99,
+  //     },
+  //     {
+  //       title: "Python Programmers",
+  //       rating: {
+  //         rateNum: 4.6,
+  //         studentRateNum: 333905,
+  //       },
+  //       studentNum: 1170294,
+  //       sale: 91,
+  //       lastUpdate: "1/1/2020",
+  //       timeline: "24:10",
+  //       price: 11.99,
+  //     },
+  //     {
+  //       title: "Python Programmers",
+  //       rating: {
+  //         rateNum: 4.6,
+  //         studentRateNum: 333905,
+  //       },
+  //       studentNum: 1170294,
+  //       sale: 91,
+  //       lastUpdate: "1/1/2020",
+  //       timeline: "24:10",
+  //       price: 11.99,
+  //     },
+  //   ],
+  // };
+
+  const watchListTemp = localStorage.getItem("watchList");
+  const [checkBox, setCheckBox] = React.useState(
+    watchListTemp?.includes(courseId)
+  );
   const dispatch = useDispatch();
-  const handleCheckBox = () => {
+  const handleCheckBox = async () => {
+    // console.log(user.token);
+    console.log(courseId);
     if (user.token) {
-      console.log(course.id);
-      dispatch(addFavCourse({ id: course.id }));
-      setCheckBox(!checkBox);
+      await Axios.post(
+        "http://localhost:3000/api/watchlist/" + courseId,
+        {},
+        {
+          headers: {
+            Authorization: "Bearer " + user.token,
+          },
+        }
+      ).then((res) => {
+        if (res.status === 200) {
+          dispatch(addFavCourse(courseId));
+          setCheckBox(!checkBox);
+        }
+      });
+
+      // dispatch(addFavCourse(courseId));
+      // setCheckBox(!checkBox);
+      // console.log(user.watchList);
+
+      await Axios.get("http://localhost:3000/api/watchlist", {
+        headers: {
+          Authorization: "Bearer " + user.token,
+        },
+      }).then((res: any) => {
+        if (res.status === 200) {
+          localStorage.setItem("watchList", JSON.stringify(res.data));
+        }
+      });
     }
   };
+  // console.log(JSON.stringify(course) + "course");
+
   return (
     <div>
       <div className={styles.banner}>
         <div className={styles.banner_left_part}>
           <p className={styles.costCourse}>
-            {course.cost === 0
+            {course.price === 0
               ? "Free Course"
-              : "$" + (course.cost * (100 - course.sale)) / 100}
+              : "$" + (course.price * (100 - course.discount)) / 100}
           </p>
           <div className={styles.underline}></div>
-          <p className={styles.course_title}>{course.title}</p>
-          <p className={styles.course_summary}>{course.summary}</p>
-          <HoverRating
-            ratingNumber={course.rating.rateNum}
-            ratingOnly={false}
-          ></HoverRating>
+          <p className={styles.course_title}>{course.name}</p>
+          <p className={styles.course_summary}>{course.overview}</p>
+          {course.id === "" ? (
+            ""
+          ) : (
+            <HoverRating
+              ratingNumber={course.rating}
+              ratingOnly={false}
+            ></HoverRating>
+          )}
           <div className={classes.numGroup}>
-            <p>{formatNumber(course.rating.studentRateNum) + " ratings"}</p>
-            <p>{formatNumber(course.studentNum) + " students"}</p>
+            <p>{formatNumber(123) + " ratings"}</p>
+            <p>{formatNumber(123) + " students"}</p>
           </div>
           <p>
-            Last Update: <span>{course.lastUpdate}</span>
+            Last Update: <span>{course.lastEdited}</span>
           </p>
           <Button
             variant="contained"
@@ -210,7 +284,11 @@ export default function CourseDetail() {
           />
         </div>
         <img
-          src="https://images.idgesg.net/images/article/2019/03/c-plus-plus_code-100790020-large.jpg"
+          src={
+            course.samplePictures[0]
+              ? course.samplePictures[0]
+              : "https://designshack.net/wp-content/uploads/placeholder-image.png"
+          }
           alt=""
           className={styles.banner_right_part}
         />
@@ -218,10 +296,8 @@ export default function CourseDetail() {
 
       <div className={styles.description}>
         <div className={styles.description_left_part}>
-          <p className={styles.descriptions_title}>
-            {course.descriptions.title}
-          </p>
-          <div className={styles.content}>
+          <p className={styles.descriptions_title}>{course.description}</p>
+          {/* <div className={styles.content}>
             {course.descriptions.content.map((item, index) => {
               return (
                 <p key={index} className={styles.description_item}>
@@ -229,7 +305,7 @@ export default function CourseDetail() {
                 </p>
               );
             })}
-          </div>
+          </div> */}
         </div>
         <div className={styles.description_right_part}>
           <div className={styles.cts_group}>
@@ -237,41 +313,41 @@ export default function CourseDetail() {
               <p className={styles.descriptions_title}>COURSE COST</p>
               <div className={classes.costCourseGroup}>
                 <p>
-                  {course.cost === 0
+                  {course.price === 0
                     ? "Free"
-                    : "$" + (course.cost * (100 - course.sale)) / 100}
+                    : "$" + (course.price * (100 - course.discount)) / 100}
                 </p>
                 <div className={classes.saleOffGroup}>
-                  <p className={classes.oldCost}>${course.cost}</p>
-                  <span className={classes.saleOff}> {course.sale}% off</span>
+                  <p className={classes.oldCost}>${course.price}</p>
+                  <span className={classes.saleOff}> {course.price}% off</span>
                 </div>
               </div>
             </div>
             {/* <div>
-              <p className={styles.descriptions_title}>TIMELINE</p>
-              <p>{course.timeline}</p>
-            </div>
-            <div>
-              <p className={styles.descriptions_title}>SKILL LEVEL</p>
-              <p>{course.skillLv}</p>
-            </div> */}
+        <p className={styles.descriptions_title}>TIMELINE</p>
+        <p>{course.timeline}</p>
+      </div>
+      <div>
+        <p className={styles.descriptions_title}>SKILL LEVEL</p>
+        <p>{course.skillLv}</p>
+      </div> */}
           </div>
           {/* <div className={styles.included_in_product}>
-            <p className={styles.descriptions_title}>INCLUDED IN PRODUCT</p>
-            <GridList cellHeight={28} className={classes.gridList} cols={2}>
-              {course.includedInProduct.map((item, index) => (
-                <GridListTile key={index} cols={1}>
-                  <p>{item}</p>
-                </GridListTile>
-              ))}
-            </GridList>
-          </div> */}
+      <p className={styles.descriptions_title}>INCLUDED IN PRODUCT</p>
+      <GridList cellHeight={28} className={classes.gridList} cols={2}>
+        {course.includedInProduct.map((item, index) => (
+          <GridListTile key={index} cols={1}>
+            <p>{item}</p>
+          </GridListTile>
+        ))}
+      </GridList>
+    </div> */}
         </div>
       </div>
 
       <CourseContent></CourseContent>
 
-      <CourseGroup course={course.relativeCourse}></CourseGroup>
+      {/* <CourseGroup course={course.relativeCourse}></CourseGroup> */}
 
       <AuthorCard></AuthorCard>
       <StudentFeedback></StudentFeedback>

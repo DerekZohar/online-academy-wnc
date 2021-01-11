@@ -25,6 +25,7 @@
 .course-title {
   font-size: 18px;
   font-weight: bold;
+  width: 800px;
 }
 .current-price {
   font-weight: bold;

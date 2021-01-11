@@ -21,9 +21,10 @@ export const loginSlice = createSlice({
             setNull(state.value);
         },
         addFavCourse:(state: any, action: any)=>{
-            console.log(action.payload)
             state.value.watchList.push(action.payload);
-            state.value = {...state.value};
+            console.log(state.value.watchList)
+
+            // state.value = {...state.value};
         },
         editUser: (state, action) => {
             state.value = { ...state.value, ...action.payload }

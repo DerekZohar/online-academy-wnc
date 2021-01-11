@@ -16,16 +16,31 @@ export default function SearchPage() {
   console.log(categoryName);
   // const rates = [4.5, 4, 3.5, 3];
   const course = {
-    imgUrl:
-      "https://img-a.udemycdn.com/course/240x135/950390_270f_3.jpg?yytG3JZ7tYO72YREFLuJZFmzcVBR1tht6FhV7r20dE1cYJI0EmPQGP5Q_UJXbjnNVdrVKCFtylxND-SIeZhKp5viPP0VHThFLzlO98p1Fc1J9rpF58mDvLro--5NB3Y",
-    title: "Machine Learning A-Z™: Hands-On Python & R In Data Science",
-    description:
-      "Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games",
-    authors: "NVT",
-    people: 137190,
-    rating: 4.6,
-    price: 120,
-    discount: 0.8,
+    _id: "5ff693bd9c016639ac03c93c",
+    price: 0,
+    rating: 0,
+    discount: 0,
+    name: "Advanced HTML course",
+    teacherId: "5ff5733e628d5a0da0ace07b",
+    samplePictures: [],
+    createdDate: "2021-01-07T04:53:17.899Z",
+    lastEdited: "2021-01-07T04:53:17.899Z",
+    __v: 3,
+    teacher: {
+      _id: "5ff5733e628d5a0da0ace07b",
+      email: "tranthuanthanh@gmail.com",
+      firstName: "Tran",
+      lastName: "Thanh",
+      __v: 0,
+    },
+    subCategory: {
+      _id: "5fecc976a705d61b5cf603cd",
+      categoryName: "HTML",
+    },
+    category: {
+      categoryName: "Web",
+      id: "5fecc59582979f0bc81cc81f",
+    },
   };
 
   const [courses, setCourses] = React.useState([1, 2, 3, 4, 5]);

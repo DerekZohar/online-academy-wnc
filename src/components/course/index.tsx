@@ -6,50 +6,74 @@ import HoverRating from "../course-details/rating";
 import "./styles.css";
 
 export default function Course({
-  imgUrl,
-  title,
-  description,
-  authors,
-  people,
-  rating,
+  _id,
   price,
+  rating,
   discount,
+  name,
+  teacherId,
+  samplePictures,
+  createdDate,
+  lastEdited,
+  __v,
+  teacher,
+  subCategory,
+  category,
 }: {
-  imgUrl: string;
-  title: string;
-  description: string;
-  authors: string;
-  people: number;
-  rating: number;
-  price: number;
-  discount: number;
+  _id: any;
+  price: any;
+  rating: any;
+  discount: any;
+  name: any;
+  teacherId: any;
+  samplePictures: any;
+  createdDate: any;
+  lastEdited: any;
+  __v: any;
+  teacher: any;
+  subCategory: any;
+  category: any;
 }) {
   const history = useHistory();
   const handleClick = () => {
-    history.push("/category/web/1");
+    history.push("/course/" + _id);
   };
   return (
     <div className="course" onClick={handleClick}>
-      <img className="image-course" src={imgUrl} alt={title} />
+      <img
+        className="image-course"
+        src={
+          samplePictures[0]
+            ? samplePictures[0]
+            : "https://designshack.net/wp-content/uploads/placeholder-image.png"
+        }
+        alt={""}
+      />
       <div className="info">
-        <p className="course-title">{title}</p>
-        <p className="description">{description}</p>
+        <p className="course-title">{name}</p>
+        <p className="description">{"description"}</p>
         <div className="row-icon-group">
           <div className="row">
             <Face />
-            <p className="authors">{authors}</p>
+            <p className="authors">
+              {teacher.firstName.concat(" " + teacher.lastName)}
+            </p>
           </div>
 
           <div className="row">
             <People />
-            <p>{formatNumber(people)}</p>
+            <p>{formatNumber(123)}</p>
           </div>
         </div>
         <HoverRating ratingNumber={rating} ratingOnly={false} />
       </div>
       <div className="price">
-        <p className="current-price">${formatNumber(price * (1 - discount))}</p>
-        <p className="old-price">${formatNumber(price)}</p>
+        <p className="current-price">
+          {price === 0 ? "Free" : "${formatNumber(price * (1 - discount))}"}
+        </p>
+        {discount === 0 ? null : (
+          <p className="old-price">${formatNumber(price)}</p>
+        )}
       </div>
     </div>
   );

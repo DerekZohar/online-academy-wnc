@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -18,11 +18,12 @@ import CourseDetail from "./components/course-details";
 import ScrollToTop from "./components/scroll-to-top";
 import { checkObjEmpty } from "./helpers/checkObjEmpty";
 import { userLogin } from "./pages/login/loginSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LearnCourse from "./pages/learn-course";
 import WatchList from "./pages/watch-list";
 import Profile from "./pages/profile";
 import SearchPage from "./pages/search";
+import Axios from "axios";
 
 function App() {
   if (!firebase.apps.length) {
@@ -34,6 +35,22 @@ function App() {
   const userInfo = localStorage.getItem("userInfo")
     ? localStorage.getItem("userInfo")
     : "";
+  // const user = useSelector((state: any) => state.user.value);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     await Axios.get("http://localhost:3000/api/watchlist", {
+  //       headers: {
+  //         Authorization: "Bearer " + user.token,
+  //       },
+  //     }).then((res: any) => {
+  //       if (res.status === 200) {
+  //         userInfo?.watchList =
+  //       }
+  //     });
+  //   }
+  //   fetchData();
+  // }, []);
   const dispatch = useDispatch();
 
   console.log(checkObjEmpty(userInfo));
@@ -55,12 +72,12 @@ function App() {
         <Route path="/sign-out">
           <LoginPage login={false} />
         </Route>
-        <Route path={`/category/web/:webId`}>
+        <Route path={`/course/:courseId`}>
           <CourseDetail />
         </Route>
-        <Route path={`/category/:categoryName`}>
+        {/* <Route path={`/category/:categoryName`}>
           <CategoryDetails />
-        </Route>
+        </Route> */}
         <Route path={"/search/:searchName"} component={SearchPage} />
 
         <Route path={"/user/learning"} component={LearnCourse} />

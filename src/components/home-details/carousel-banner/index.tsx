@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, {
   Navigation,
@@ -11,17 +11,25 @@ import "swiper/swiper-bundle.css";
 import "swiper/components/pagination/pagination.scss";
 import HoverRating from "../../course-details/rating";
 import { useHistory } from "react-router-dom";
+import Axios from "axios";
 
 SwiperCore.use([Navigation]);
 SwiperCore.use([Pagination]);
 SwiperCore.use([Autoplay]);
 SwiperCore.use([EffectFade]);
 
-export default function CarouselBanner({ courses }: { courses: any }) {
+export default function CarouselBanner() {
   const history = useHistory();
   const handleClick = () => {
-    history.push("/category/web/1");
+    // history.push("/category/web/1");
   };
+  const [courseCB, setcourseCB] = useState([]);
+  // console.log(process.env.REACT_APP_API_COURSES);
+  useEffect(() => {
+    Axios.get(`${process.env.REACT_APP_API_COURSES}`).then((res) => {
+      setcourseCB(res.data);
+    });
+  }, []);
   return (
     <Swiper
       id="swiper-color"

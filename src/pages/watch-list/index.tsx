@@ -6,6 +6,8 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Pagination from "@material-ui/lab/Pagination";
 import Course from "../../components/course";
 import "./styles.css";
+import Axios from "axios";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,11 +26,28 @@ const useStyles = makeStyles((theme) => ({
 
 const AllProjects = () => {
   const classes = useStyles();
+
+  const user = useSelector((state: any) => state.user.value);
+  const [courses, setCourses] = React.useState([]);
+  React.useEffect(() => {
+    async function fetchData() {
+      await Axios.get("http://localhost:3000/api/watchlist", {
+        headers: {
+          Authorization: "Bearer " + user.token,
+        },
+      }).then((res: any) => {
+        if (res.status === 200) {
+          setCourses(res.data);
+          console.log(res.data);
+        }
+      });
+    }
+    fetchData();
+  }, []);
+
   const itemsPerPage = 10;
   const [page, setPage] = React.useState(1);
-  const [noOfPages] = React.useState(
-    Math.ceil(projectsList.length / itemsPerPage)
-  );
+  const [noOfPages] = React.useState(Math.ceil(courses.length / itemsPerPage));
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -45,14 +64,15 @@ const AllProjects = () => {
     price: 120,
     discount: 0.8,
   };
+
   return (
     <div className="watch-list">
       <List>
-        {projectsList
+        {courses
           .slice((page - 1) * itemsPerPage, page * itemsPerPage)
-          .map((projectItem) => {
-            const labelId = `list-secondary-label-${projectItem.projectName}`;
-            return <Course {...course} />;
+          .map((projectItem: any) => {
+            const labelId = `list-secondary-label-${projectItem.name}`;
+            return <Course {...projectItem} />;
           })}
       </List>
       <Divider />
