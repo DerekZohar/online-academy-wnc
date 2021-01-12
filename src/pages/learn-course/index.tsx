@@ -1,11 +1,40 @@
-import { CircularProgress, GridList, GridListTile } from "@material-ui/core";
-import React, { useState } from "react";
+import { GridList, GridListTile } from "@material-ui/core";
+import Axios from "axios";
+import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import PageNotFound from "../page-not-found";
 import CourseItem from "./course-item";
 import CircularProgressWithLabel from "./progress-with-label";
 import "./styles.css";
 
-export default function LearnCourse() {
+export default function LearnCourseItem() {
+  let { courseId }: { courseId: string } = useParams();
+  const [isExistCourse, setIsExistCourse] = useState(false);
+
+  const [lessons, setLessons] = useState([{ videoUrl: "" }]);
+  const user = useSelector((state: any) => state.user.value);
+
+  useEffect(() => {
+    async function fetchData() {
+      await Axios.get("http://localhost:3000/api/course/" + courseId, {
+        headers: {
+          Authorization: "Bearer " + user.token,
+        },
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            setLessons(res.data.lessons);
+            console.log(res.data.lessons);
+            setIsExistCourse(true);
+          }
+        })
+        .catch((e) => {});
+    }
+    fetchData();
+  }, []);
+
   const courses = [
     {
       url: "https://www.youtube.com/watch?v=KDkEDoIXm5U",
@@ -24,12 +53,14 @@ export default function LearnCourse() {
       tick: false,
     },
   ];
-  const [itemClicked, setItemClicked] = useState(courses[0].url);
+
+  const [itemClicked, setItemClicked] = useState(lessons[0].videoUrl);
   const handItemClick = (idx: any) => {
-    console.log(idx);
-    setItemClicked(idx.url);
+    setItemClicked(idx);
   };
   const [progress, setProgress] = React.useState(10);
+
+  if (isExistCourse === false) return <PageNotFound />;
   return (
     <div className="learn-course">
       <div className="video-course">
@@ -55,9 +86,13 @@ export default function LearnCourse() {
           }}
           cols={1}
         >
-          {courses.map((url: any, idx: number) => (
+          {lessons.map((item: any, idx: number) => (
             <GridListTile key={idx} style={{ backgroundColor: itemClicked }}>
-              <CourseItem id={idx} url={url} onClick={handItemClick} />
+              <CourseItem
+                id={idx}
+                url={item.videoUrl}
+                onClick={handItemClick}
+              />
             </GridListTile>
           ))}
         </GridList>

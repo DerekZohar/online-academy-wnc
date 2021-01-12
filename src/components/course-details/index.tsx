@@ -192,10 +192,27 @@ export default function CourseDetail() {
   //   ],
   // };
 
-  const watchListTemp = localStorage.getItem("watchList");
-  const [checkBox, setCheckBox] = React.useState(
-    watchListTemp?.includes(courseId)
-  );
+  // const watchListTemp = localStorage.getItem("watchList");
+  const [checkBox, setCheckBox] = React.useState(false);
+  useEffect(() => {
+    async function fetchData() {
+      await Axios.get("http://localhost:3000/api/watchlist", {
+        headers: {
+          Authorization: "Bearer " + user.token,
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          // setWatchlist(res.data);
+          const temp = res.data?.map((item: any) => item._id === courseId);
+          // console.log(temp);
+          // console.log(temp.includes(true));
+          setCheckBox(temp.includes(true));
+        }
+      });
+    }
+    fetchData();
+  }, []);
+
   const dispatch = useDispatch();
   const handleCheckBox = async () => {
     // console.log(user.token);
@@ -229,18 +246,53 @@ export default function CourseDetail() {
         }
       });
     }
-    await Axios.get("http://localhost:3000/api/watchlist", {
-      headers: {
-        Authorization: "Bearer " + user.token,
-      },
-    }).then((res: any) => {
-      if (res.status === 200) {
-        localStorage.setItem("watchList", JSON.stringify(res.data));
-      }
-    });
+    // await Axios.get("http://localhost:3000/api/watchlist", {
+    //   headers: {
+    //     Authorization: "Bearer " + user.token,
+    //   },
+    // }).then((res: any) => {
+    //   if (res.status === 200) {
+    //     localStorage.setItem("watchList", JSON.stringify(res.data));
+    //   }
+    // });
   };
   // console.log(JSON.stringify(course) + "course");
 
+  const [purchase, setPurchase] = React.useState(false);
+  useEffect(() => {
+    async function fetchData() {
+      await Axios.get(
+        "http://localhost:3000/api/purchase?courseId=" + courseId,
+        {
+          headers: {
+            Authorization: "Bearer " + user.token,
+          },
+        }
+      ).then((res) => {
+        if (res.status === 200) {
+          setPurchase(true);
+        }
+      });
+    }
+    fetchData();
+  }, []);
+  const handlePurchaseCourse = async () => {
+    if (user.token) {
+      await Axios.post(
+        "http://localhost:3000/api/purchase/" + courseId,
+        {},
+        {
+          headers: {
+            Authorization: "Bearer " + user.token,
+          },
+        }
+      ).then((res) => {
+        if (res.status === 200) {
+          setPurchase(!purchase);
+        }
+      });
+    }
+  };
   return (
     <div>
       <div className={styles.banner}>
@@ -276,8 +328,10 @@ export default function CourseDetail() {
               padding: "8px 24px 8px 24px",
               marginTop: 10,
             }}
+            onClick={handlePurchaseCourse}
+            disabled={purchase}
           >
-            Enroll This Course
+            {purchase ? "Owned" : "Enroll This Course"}
           </Button>
           <FormControlLabel
             control={

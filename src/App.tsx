@@ -25,6 +25,7 @@ import Profile from "./pages/profile";
 import SearchPage from "./pages/search";
 import Axios from "axios";
 import SignoutPage from "./pages/signout";
+import MyLearning from "./pages/my-learning";
 
 function App() {
   if (!firebase.apps.length) {
@@ -81,7 +82,9 @@ function App() {
         </Route> */}
         <Route path={"/search/:searchName"} component={SearchPage} />
 
-        <Route path={"/user/learning"} component={LearnCourse} />
+        <Route exact path={"/user/learning"} component={MyLearning} />
+        <Route path={"/user/learning/:courseId"} component={LearnCourse} />
+
         <Route path={"/user/watchlist"} component={WatchList} />
         <Route path={"/user/profile"} component={Profile} />
         <Route component={PageNotFound} />

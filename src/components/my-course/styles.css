@@ -1,0 +1,32 @@
+.course {
+  height: 15%;
+  width: 80%;
+
+  display: flex;
+  flex-direction: row;
+
+  padding: 20px 0;
+  /* justify-content: space-around; */
+}
+.row {
+  display: flex;
+}
+.row-icon-group {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+.course-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.image-course {
+  height: 150px;
+  border-radius: 10px;
+}
