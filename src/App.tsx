@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import LearnCourse from "./pages/learn-course";
 import WatchList from "./pages/watch-list";
 import Profile from "./pages/profile";
+import CourseManagement from './pages/admin/course-management'
 
 function App() {
   if (!firebase.apps.length) {
@@ -64,6 +65,9 @@ function App() {
         <Route path={"/user/learning"} component={LearnCourse} />
         <Route path={"/user/watchlist"} component={WatchList} />
         <Route path={"/user/profile"} component={Profile} />
+        <Route path={'/admin/course-management'}>
+          <CourseManagement/>
+        </Route>
         <Route component={PageNotFound} />
       </Switch>
     </Router>

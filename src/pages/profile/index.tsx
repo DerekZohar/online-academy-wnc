@@ -42,7 +42,7 @@ export default function Profile() {
 	const [ passOpen, setPassOpen ] = useState(false);
 	const [ currentFirstName, setCurrentFirstName ] = useState(user.firstName);
   const [currentLastName, setCurrentLastName] = useState(user.lastName);
-  const [currentbirthDay, setBirthDay] = useState(user.BirthDate);
+  const [currentbirthDay, setBirthDay] = useState(user.birthDate);
 
 	const FirstNameChange = (e: any) => {
 		tempFirstName = e.target.value;
