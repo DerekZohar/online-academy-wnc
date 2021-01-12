@@ -24,6 +24,7 @@ import WatchList from "./pages/watch-list";
 import Profile from "./pages/profile";
 import SearchPage from "./pages/search";
 import Axios from "axios";
+import SignoutPage from "./pages/signout";
 
 function App() {
   if (!firebase.apps.length) {
@@ -67,10 +68,10 @@ function App() {
           <HomePage />
         </Route>
         <Route path="/login">
-          <LoginPage login={true} />
+          <LoginPage />
         </Route>
         <Route path="/sign-out">
-          <LoginPage login={false} />
+          <SignoutPage />
         </Route>
         <Route path={`/course/:courseId`}>
           <CourseDetail />

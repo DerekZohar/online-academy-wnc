@@ -27,7 +27,7 @@ export default function LearnCourse() {
   const [itemClicked, setItemClicked] = useState(courses[0].url);
   const handItemClick = (idx: any) => {
     console.log(idx);
-    setItemClicked(idx);
+    setItemClicked(idx.url);
   };
   const [progress, setProgress] = React.useState(10);
   return (

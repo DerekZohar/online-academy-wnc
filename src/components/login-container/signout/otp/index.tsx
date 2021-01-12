@@ -29,7 +29,9 @@ export default function FormDialog({
       email: email,
       otp: otpCode,
     }).then((res) => {
-      if (res.status === 200) history.push("/login");
+      if (res.status === 200) {
+        history.push("/login");
+      }
     });
   };
   const handleOtpCodeChange = (e: any) => {

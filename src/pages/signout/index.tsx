@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Login from "../../components/login-container/login";
 import SignOut from "../../components/login-container/signout";
-import "./styles.css";
+// import "./styles.css";
 import registerSVG from "../../assets/register.svg";
 import logSVG from "../../assets/log.svg";
 import {
@@ -17,7 +17,6 @@ import Axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { checkObjEmpty } from "../../helpers/checkObjEmpty";
-import { userLogin } from "./loginSlice";
 import CustomizedSnackbars from "../../components/login-container/alert-error";
 // import { useDispatch, useSelector } from "react-redux";
 
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function LoginPage() {
+export default function SignoutPage() {
   const classes = useStyles();
   const history = useHistory();
 
@@ -44,19 +43,11 @@ export default function LoginPage() {
     setOpen(!open);
   };
 
-  // const user = useSelector((state: any) => state.user.value);
-  const dispatch = useDispatch();
-  const userInfo = localStorage.getItem("userInfo")
-    ? localStorage.getItem("userInfo")
-    : "";
-  console.log(checkObjEmpty(userInfo));
-  if (checkObjEmpty(userInfo) === false) {
-    dispatch(userLogin(JSON.parse(userInfo || "{}")));
-    history.push("/");
-  }
+  // if (!isLogin) {
+  // }
 
   return (
-    <div className="container">
+    <div className="container sign-up-mode">
       <div className="forms-container">
         <div className="signin-signup">
           <Login handleToggle={handleToggle} handleClose={handleClose} />
