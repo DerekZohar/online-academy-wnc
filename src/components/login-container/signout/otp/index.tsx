@@ -6,6 +6,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export default function FormDialog({
   email,
@@ -18,6 +20,21 @@ export default function FormDialog({
   handleClickOpen: any;
   handleClose: any;
 }) {
+  const history = useHistory();
+  const [otpCode, setOtpCode] = React.useState("");
+  console.log(otpCode);
+  console.log(email);
+  const handleVerify = async () => {
+    await Axios.post("http://localhost:3000/api/authentication/verify", {
+      email: email,
+      otp: otpCode,
+    }).then((res) => {
+      if (res.status === 200) history.push("/login");
+    });
+  };
+  const handleOtpCodeChange = (e: any) => {
+    setOtpCode(e.target.value);
+  };
   return (
     <div>
       {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -40,6 +57,8 @@ export default function FormDialog({
             id="name"
             label="Otp code"
             type="string"
+            value={otpCode}
+            onChange={handleOtpCodeChange}
             fullWidth
           />
         </DialogContent>
@@ -47,7 +66,7 @@ export default function FormDialog({
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleVerify} color="primary">
             Verify
           </Button>
         </DialogActions>
