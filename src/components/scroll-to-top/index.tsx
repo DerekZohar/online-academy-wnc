@@ -9,7 +9,7 @@ function ScrollToTop({ history }: { history: any }) {
     return () => {
       unlisten();
     };
-  }, []);
+  }, [history]);
 
   return null;
 }

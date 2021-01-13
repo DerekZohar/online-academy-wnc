@@ -78,6 +78,9 @@ export default function AvatarUser() {
   const handleProfile = () => {
     history.push("/user/profile");
   };
+  const handleMyLearning = () => {
+    history.push("/user/learning");
+  };
   return (
     <div className={classes.root}>
       {/* <Avatar
@@ -127,7 +130,7 @@ export default function AvatarUser() {
                   onKeyDown={handleListKeyDown}
                 >
                   <MenuItem onClick={handleWatchList}>Watch List</MenuItem>
-                  <MenuItem onClick={handleClose}>My learning</MenuItem>
+                  <MenuItem onClick={handleMyLearning}>My learning</MenuItem>
                   <hr />
                   {/* <MenuItem onClick={handleClose}>Public Profile</MenuItem> */}
                   <MenuItem onClick={handleProfile}>Edit Profile</MenuItem>

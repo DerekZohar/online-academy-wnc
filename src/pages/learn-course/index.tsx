@@ -33,26 +33,26 @@ export default function LearnCourseItem() {
         .catch((e) => {});
     }
     fetchData();
-  }, []);
+  }, [courseId, user.token]);
 
-  const courses = [
-    {
-      url: "https://www.youtube.com/watch?v=KDkEDoIXm5U",
-      tick: false,
-    },
-    {
-      url: "https://www.youtube.com/watch?v=w-jjEI-mUxA",
-      tick: false,
-    },
-    {
-      url: "https://www.youtube.com/watch?v=2Oz_d2q7GQQ",
-      tick: false,
-    },
-    {
-      url: "https://www.youtube.com/watch?v=Llw4Pv2M6d0",
-      tick: false,
-    },
-  ];
+  // const courses = [
+  //   {
+  //     url: "https://www.youtube.com/watch?v=KDkEDoIXm5U",
+  //     tick: false,
+  //   },
+  //   {
+  //     url: "https://www.youtube.com/watch?v=w-jjEI-mUxA",
+  //     tick: false,
+  //   },
+  //   {
+  //     url: "https://www.youtube.com/watch?v=2Oz_d2q7GQQ",
+  //     tick: false,
+  //   },
+  //   {
+  //     url: "https://www.youtube.com/watch?v=Llw4Pv2M6d0",
+  //     tick: false,
+  //   },
+  // ];
 
   const [itemClicked, setItemClicked] = useState(lessons[0].videoUrl);
   const handItemClick = (idx: any) => {

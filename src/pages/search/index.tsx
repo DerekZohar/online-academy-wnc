@@ -1,19 +1,40 @@
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Course from "../../components/course";
 import FilterCourse from "../../components/filter-course";
 
 import "./styles.css";
+import { useSelector } from "react-redux";
+import Axios from "axios";
 
 export default function SearchPage() {
-  let { categoryName }: { categoryName: string } = useParams();
-  console.log(categoryName);
+  let { searchName }: { searchName: string } = useParams();
+  // console.log(searchName);
+  const user = useSelector((state: any) => state.user.value);
+  const [courses, setCourses] = React.useState([1, 2, 3, 4, 5]);
+
+  useEffect(() => {
+    async function fetchData() {
+      await Axios.get(
+        "http://localhost:3000/api/course?keyword=" + searchName,
+        {
+          headers: {
+            Authorization: "Bearer " + user.token,
+          },
+        }
+      ).then((res) => {
+        if (res.status === 200) {
+          // console.log(res.data);
+          setCourses(res.data);
+        }
+      });
+    }
+    fetchData();
+  }, [searchName, user.token]);
   // const rates = [4.5, 4, 3.5, 3];
   const course = {
     _id: "5ff693bd9c016639ac03c93c",
@@ -43,7 +64,6 @@ export default function SearchPage() {
     },
   };
 
-  const [courses, setCourses] = React.useState([1, 2, 3, 4, 5]);
   const changeCourse = (rating: number) => {
     //change course follow rating value
     console.log("change course" + rating);

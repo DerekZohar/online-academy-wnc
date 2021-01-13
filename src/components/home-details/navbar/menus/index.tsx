@@ -11,6 +11,8 @@ import NestedList from "./menu";
 import { Menu } from "@material-ui/core";
 import NestedMenuItem from "material-ui-nested-menu-item";
 import Axios from "axios";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,9 +84,11 @@ export default function MenuListComposition() {
       left: event.pageX,
     });
   };
-
-  const handleItemClick = (event: React.MouseEvent) => {
-    console.log(123);
+  const history = useHistory();
+  const user = useSelector((state: any) => state.user.value);
+  const handleItemClick = async (value: any) => {
+    console.log("/search/" + value);
+    history.push("/search/" + value);
   };
   // console.log(JSON.stringify(categories[0]) + "cate");
 
@@ -114,11 +118,14 @@ export default function MenuListComposition() {
               key={idx}
               label={item.categoryName}
               parentMenuOpen={!!menuPosition}
-              onClick={handleItemClick}
+              onClick={() => handleItemClick(item.categoryName)}
             >
               {item.subCategories.map((value: any, id: number) => {
                 return (
-                  <MenuItem key={id} onClick={handleItemClick}>
+                  <MenuItem
+                    key={id}
+                    onClick={() => handleItemClick(value.categoryName)}
+                  >
                     {value.categoryName}
                   </MenuItem>
                 );

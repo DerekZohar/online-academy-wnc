@@ -29,7 +29,7 @@ export default function index() {
     <div className="reivews">
       {reviews.map((item, index) => {
         return (
-          <div className="root">
+          <div key={index} className="root">
             <Avatar
               alt="Remy Sharp"
               src={item.avatar}

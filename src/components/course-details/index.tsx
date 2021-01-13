@@ -3,8 +3,6 @@ import {
   Checkbox,
   createStyles,
   FormControlLabel,
-  GridList,
-  GridListTile,
   makeStyles,
   Theme,
 } from "@material-ui/core";
@@ -15,16 +13,16 @@ import AuthorCard from "../../components/course-details/author-card";
 import CourseContent from "../../components/course-details/course-content";
 import HoverRating from "../../components/course-details/rating";
 import StudentFeedback from "../../components/course-details/student-feedback";
-import CourseGroup from "../../components/course-details/course-group";
+// import CourseGroup from "../../components/course-details/course-group";
 
 import { formatNumber } from "../../helpers/formatNumber";
 import styles from "./styles.module.css";
-import { Favorite, FavoriteBorder, FavoriteOutlined } from "@material-ui/icons";
+import { Favorite, FavoriteBorder } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavCourse } from "../../pages/login/loginSlice";
 import Axios from "axios";
-import Course from "../../services/courseInterface";
-import { id } from "date-fns/esm/locale";
+// import Course from "../../services/courseInterface";
+// import { id } from "date-fns/esm/locale";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -96,7 +94,7 @@ export default function CourseDetail() {
       );
     }
     fetchData();
-  }, []);
+  }, [courseId]);
 
   const user = useSelector((state: any) => state.user.value);
   // const course = {
@@ -211,7 +209,7 @@ export default function CourseDetail() {
       });
     }
     fetchData();
-  }, []);
+  }, [user.token, courseId]);
 
   const dispatch = useDispatch();
   const handleCheckBox = async () => {
@@ -275,7 +273,7 @@ export default function CourseDetail() {
       });
     }
     fetchData();
-  }, []);
+  }, [courseId, user.token]);
   const handlePurchaseCourse = async () => {
     if (user.token) {
       await Axios.post(

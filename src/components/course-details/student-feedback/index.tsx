@@ -43,7 +43,7 @@ export default function StudentFeedback() {
         <div className={styles.rating}>
           {valueFeedback.rating.ratios.map((item: any, index: number) => {
             return (
-              <div className={styles.root}>
+              <div key={index} className={styles.root}>
                 <LinearProgressWithLabel value={item} />
                 <HoverRating
                   ratingNumber={index + 1}

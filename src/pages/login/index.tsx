@@ -6,19 +6,15 @@ import registerSVG from "../../assets/register.svg";
 import logSVG from "../../assets/log.svg";
 import {
   Backdrop,
-  Button,
   CircularProgress,
   createStyles,
   makeStyles,
-  TextField,
   Theme,
 } from "@material-ui/core";
-import Axios from "axios";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { checkObjEmpty } from "../../helpers/checkObjEmpty";
 import { userLogin } from "./loginSlice";
-import CustomizedSnackbars from "../../components/login-container/alert-error";
 // import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme: Theme) =>

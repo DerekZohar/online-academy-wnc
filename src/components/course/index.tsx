@@ -69,7 +69,7 @@ export default function Course({
       </div>
       <div className="price">
         <p className="current-price">
-          {price === 0 ? "Free" : "${formatNumber(price * (1 - discount))}"}
+          {price === 0 ? "Free" : formatNumber(price * (1 - discount))}
         </p>
         {discount === 0 ? null : (
           <p className="old-price">${formatNumber(price)}</p>

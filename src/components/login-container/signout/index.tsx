@@ -1,57 +1,13 @@
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import "./styles.css";
-import registerSVG from "../../../assets/register.svg";
-import SocialMedia from "../social-media";
-import {
-  Facebook,
-  MailOutline,
-  LinkedIn,
-  AccountCircle,
-  Lock,
-  Mail,
-  GitHub,
-} from "@material-ui/icons";
-import { signInWithGithub, signInWithGoogle } from "../../../services/firebase";
-import {
-  Backdrop,
-  Button,
-  Checkbox,
-  CircularProgress,
-  FormControlLabel,
-  Grid,
-  makeStyles,
-  TextField,
-  Theme,
-} from "@material-ui/core";
-import {
-  DatePicker,
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
+
+import { Checkbox, FormControlLabel, Grid, TextField } from "@material-ui/core";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import OtpInput from "react-otp-input";
 import OtpDialog from "./otp";
-const useStyles = makeStyles((theme: Theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+
 export default function SignOut({
   handleToggle,
   handleClose,

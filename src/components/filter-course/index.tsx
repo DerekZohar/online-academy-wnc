@@ -27,8 +27,9 @@ export default function FilterCourse({ changeCourse }: { changeCourse: any }) {
         value={value}
         onChange={handleChange}
       >
-        {values.map((item) => (
+        {values.map((item, index) => (
           <FormControlLabel
+            key={index}
             value={item}
             control={<Radio />}
             label={<p>{item + " & up"}</p>}

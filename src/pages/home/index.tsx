@@ -1,8 +1,7 @@
 import CarouselBanner from "../../components/home-details/carousel-banner";
 import CarouselTopic from "../../components/home-details/carousel-topic";
 import MultiCarousel from "../../components/home-details/multicarousel";
-import React, { useEffect, useState } from "react";
-import Axios from "axios";
+import React from "react";
 
 export default function HomePage() {
   return (
