@@ -24,6 +24,8 @@ import SearchPage from "./pages/search";
 import SignoutPage from "./pages/signout";
 import MyLearning from "./pages/my-learning";
 
+import PostCourse from "./pages/teacher/post-course";
+
 function App() {
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -50,6 +52,7 @@ function App() {
   //   }
   //   fetchData();
   // }, []);
+
   const dispatch = useDispatch();
 
   console.log(checkObjEmpty(userInfo));
@@ -84,6 +87,7 @@ function App() {
         <Route path={"/user/watchlist"} component={WatchList} />
         <Route path={"/user/profile"} component={Profile} />
 
+        <Route path={"/teacher/post-course"} component={PostCourse} />
         <Route component={PageNotFound} />
       </Switch>
     </Router>

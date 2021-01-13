@@ -1,0 +1,9 @@
+.post-course {
+  margin-top: 100px;
+}
+.form-post {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
