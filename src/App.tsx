@@ -27,6 +27,8 @@ import CourseManagement from "./pages/admin/course-management";
 import CategoryManagement from "./pages/admin/categories-management";
 import UserManagement from "./pages/admin/users-management";
 
+import PostCourse from "./pages/teacher/post-course";
+
 function App() {
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -53,6 +55,7 @@ function App() {
   //   }
   //   fetchData();
   // }, []);
+
   const dispatch = useDispatch();
 
   console.log(checkObjEmpty(userInfo));
@@ -96,6 +99,7 @@ function App() {
         <Route path={"/admin/users-management"}>
           <UserManagement />
         </Route>
+        <Route path={"/teacher/post-course"} component={PostCourse} />
         <Route component={PageNotFound} />
       </Switch>
     </Router>

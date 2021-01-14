@@ -310,31 +310,37 @@ export default function CourseDetail() {
           <p>
             Last Update: <span>{course.lastEdited}</span>
           </p>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{
-              fontSize: "16px",
-              padding: "8px 24px 8px 24px",
-              marginTop: 10,
-            }}
-            onClick={handlePurchaseCourse}
-            disabled={purchase}
-          >
-            {purchase ? "Owned" : "Enroll This Course"}
-          </Button>
-          <FormControlLabel
-            control={
-              <Checkbox
-                icon={<FavoriteBorder />}
-                checkedIcon={<Favorite />}
-                name="checkedH"
-                checked={checkBox}
-                onClick={handleCheckBox}
+          {user.roleId === 1 ? (
+            <div>
+              <Button
+                variant="contained"
+                color="primary"
+                style={{
+                  fontSize: "16px",
+                  padding: "8px 24px 8px 24px",
+                  marginTop: 10,
+                }}
+                onClick={handlePurchaseCourse}
+                disabled={purchase}
+              >
+                {purchase ? "Owned" : "Enroll This Course"}
+              </Button>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    icon={<FavoriteBorder />}
+                    checkedIcon={<Favorite />}
+                    name="checkedH"
+                    checked={checkBox}
+                    onClick={handleCheckBox}
+                  />
+                }
+                label=""
               />
-            }
-            label=""
-          />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <img
           src={
