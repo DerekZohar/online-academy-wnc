@@ -18,7 +18,8 @@ import LearnCourse from './pages/learn-course';
 import WatchList from './pages/watch-list';
 import Profile from './pages/profile';
 import CourseManagement from './pages/admin/course-management';
-import CategoryManagement from './pages/admin/categories-management'
+import CategoryManagement from './pages/admin/categories-management';
+import UserManagement from './pages/admin/users-management';
 
 function App() {
 	if (!firebase.apps.length) {
@@ -61,10 +62,13 @@ function App() {
 				<Route path={'/user/profile'} component={Profile} />
 				<Route path={'/admin/course-management'}>
 					<CourseManagement />
-        </Route>
-        <Route path={'/admin/categories-management'}>
-          <CategoryManagement/>
-        </Route>
+				</Route>
+				<Route path={'/admin/categories-management'}>
+					<CategoryManagement />
+				</Route>
+				<Route path={'/admin/users-management'}>
+					<UserManagement />
+				</Route>
 				<Route component={PageNotFound} />
 			</Switch>
 		</Router>

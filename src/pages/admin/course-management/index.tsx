@@ -14,21 +14,33 @@ export default function Admin_Course() {
 	const user = useSelector((state: any) => state.user.value);
 	const [ thisList, setList ] = useState([
 		{
+			_id: '',
 			price: 0,
 			rating: 0,
 			discount: 0,
 			name: '',
 			teacherId: '',
-			categoryId: '',
-			subCategoryId: '',
+			description: '',
+			overview: '',
 			samplePictures: [],
 			createdDate: '',
 			lastEdited: '',
-			feedback: [],
-			lessons: [],
-			description: '',
-			overview: '',
-			id: ''
+			__v: 0,
+			teacher: {
+				_id: '',
+				email: '',
+				firstName: '',
+				lastName: '',
+				__v: 4
+			},
+			subCategory: {
+				_id: '',
+				categoryName: ''
+			},
+			category: {
+				categoryName: '',
+				id: ''
+			}
 		}
 	]);
 
@@ -60,6 +72,18 @@ export default function Admin_Course() {
 			.catch((error) => {
 				alert(error);
 			});
+
+		await Axios.get('http://localhost:3000/api/course', {
+			headers: {
+				Authorization: 'Bearer ' + user.token
+			}
+		})
+			.then((res) => {
+				setList(res.data);
+			})
+			.catch((error) => {
+				alert(error);
+			});
 	};
 
 	if (!user.token) return <div />;
@@ -75,10 +99,13 @@ export default function Admin_Course() {
 								src="https://designshack.net/wp-content/uploads/placeholder-image.png?fbclid=IwAR2ofEWpEemBKyPiNsoXM7eft07vVAdvlniEDeC8Z2CXxmhA-954oUTW2Mc"
 							/>
 						</ListItemAvatar>
-						<ListItemText primary={value.name} secondary={value.description} />
+						<ListItemText primary={value.name} secondary={<div>
+							<p>Teacher: {value.teacher.firstName} {value.teacher.lastName}</p>
+							<p>Category: {value.category.categoryName} / {value.subCategory.categoryName}</p>
+						</div>} />
 						<ListItemSecondaryAction>
-							<IconButton>
-								<DeleteIcon onClick={() => onDeleteCourse(value.id)} />
+							<IconButton onClick={() => onDeleteCourse(value._id)}>
+								<DeleteIcon />
 							</IconButton>
 						</ListItemSecondaryAction>
 					</ListItem>
