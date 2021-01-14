@@ -18,13 +18,20 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 export default function ImageCourse(props: any) {
   const classes = useStyles();
-  const { activeStep, isLastStep, handleBack, handleNext } = props;
+  const {
+    values,
+    setValues,
+    activeStep,
+    isLastStep,
+    handleBack,
+    handleNext,
+  } = props;
   const formik = useFormik({
     initialValues: {
       description: "",
     },
     onSubmit: (value: any) => {
-      console.log(value);
+      setValues({ ...values, ...value });
       handleNext();
     },
   });

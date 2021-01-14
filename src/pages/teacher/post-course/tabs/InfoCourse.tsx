@@ -27,11 +27,20 @@ export default function InfoCourse(props: any) {
       subCategory: "",
     },
     onSubmit: (value: any) => {
-      console.log(value);
+      // console.log(value);
+      setValues({ ...values, ...value });
+      // console.log({ ...values, ...value });
       handleNext();
     },
   });
-  const { activeStep, isLastStep, handleBack, handleNext } = props;
+  const {
+    values,
+    setValues,
+    activeStep,
+    isLastStep,
+    handleBack,
+    handleNext,
+  } = props;
 
   // const handleNextClick = () => {
   //   handleNext();

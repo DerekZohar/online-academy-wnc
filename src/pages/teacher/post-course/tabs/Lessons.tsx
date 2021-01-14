@@ -20,34 +20,53 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function ImageCourse(props: any) {
   const classes = useStyles();
   const user = useSelector((state: any) => state.user.value);
-  const { activeStep, isLastStep, handleBack, handleNext } = props;
+  const { values, setValues, activeStep, isLastStep, handleBack } = props;
+  const [courses, setCourses] = React.useState([{ title: "", url: "" }]);
   const formik = useFormik({
     initialValues: {
       title: "",
       url: "",
     },
     onSubmit: async (value: any) => {
-      // console.log(value);
-      // handleNext();
-      if (isLastStep) {
-        await Axios.post(
-          "http://localhost:3000/api/course/",
-          {},
-          {
-            headers: {
-              Authorization: "Bearer " + user.token,
-            },
-          }
-        );
-      }
+      setValues({ ...values, lessons: courses });
+
+      // if (isLastStep) {
+      //   await Axios.post(
+      //     "http://localhost:3000/api/course/",
+      //     {},
+      //     {
+      //       headers: {
+      //         Authorization: "Bearer " + user.token,
+      //       },
+      //     }
+      //   ).then((res) => {
+      //     if (res.status === 200) {
+      //     }
+      //   });
+      // }
     },
   });
-
+  const addLesson = () => {
+    // console.log(formik.values.title);
+    const temp = courses;
+    temp.push({ title: formik.values.title, url: formik.values.url });
+    setCourses(courses);
+    // console.log(temp);
+  };
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Image Course
-      </Typography>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={10}>
+          <Typography variant="h6" gutterBottom>
+            Lessons
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={2}>
+          <Button variant="contained" color="primary" onClick={addLesson}>
+            Add
+          </Button>
+        </Grid>
+      </Grid>
       <form action="" onSubmit={formik.handleSubmit} style={{ padding: 0 }}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -91,11 +110,11 @@ export default function ImageCourse(props: any) {
             className={classes.button}
             type="submit"
           >
-            {isLastStep ? "Place order" : "Next"}
+            {isLastStep ? "Post Course" : "Next"}
           </Button>
         </div>
       </form>
-      <LessonsTree />
+      {/* <LessonsTree /> */}
     </React.Fragment>
   );
 }

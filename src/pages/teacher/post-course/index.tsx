@@ -51,15 +51,18 @@ const useStyles = makeStyles((theme) => ({
 export default function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [courseInfo, setCourseInfo] = useState({});
 
   const steps = ["Info course", "Image course", "Description", "Lessons"];
-
+  console.log(courseInfo);
   function getStepContent(step: any) {
     const isLastStep = activeStep === steps.length - 1;
     switch (step) {
       case 0:
         return (
           <InfoCourse
+            values={courseInfo}
+            setValues={setCourseInfo}
             activeStep={activeStep}
             isLastStep={isLastStep}
             handleBack={handleBack}
@@ -69,6 +72,8 @@ export default function Checkout() {
       case 1:
         return (
           <ImageCourse
+            values={courseInfo}
+            setValues={setCourseInfo}
             activeStep={activeStep}
             isLastStep={isLastStep}
             handleBack={handleBack}
@@ -78,6 +83,8 @@ export default function Checkout() {
       case 2:
         return (
           <DescriptionCourse
+            values={courseInfo}
+            setValues={setCourseInfo}
             activeStep={activeStep}
             isLastStep={isLastStep}
             handleBack={handleBack}
@@ -87,6 +94,8 @@ export default function Checkout() {
       case 3:
         return (
           <Lessons
+            values={courseInfo}
+            setValues={setCourseInfo}
             activeStep={activeStep}
             isLastStep={isLastStep}
             handleBack={handleBack}
@@ -98,7 +107,6 @@ export default function Checkout() {
     }
   }
 
-  const [courseInfo, setCourseInfo] = useState({});
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -123,42 +131,7 @@ export default function Checkout() {
             ))}
           </Stepper>
           {getStepContent(activeStep)}
-          {/* <React.Fragment>
-            {activeStep === steps.length ? (
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
-                </Typography>
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                {getStepContent(activeStep)}
-                <div className={classes.buttons}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
-                      Back
-                    </Button>
-                  )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? "Place order" : "Next"}
-                  </Button>
-                </div>
-              </React.Fragment>
-            )}
-          </React.Fragment>
-         */}
         </Paper>
-        {/* <Copyright /> */}
       </main>
     </React.Fragment>
   );
