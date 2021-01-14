@@ -29,7 +29,7 @@ export default function SignOut({
         firstName: values.firstName,
         lastName: values.lastName,
         email: values.email,
-        roleId: 1,
+        roleId: values.roleId ? 2 : 1,
         birthDate: selectedDate?.toString(),
         password: values.password,
       };

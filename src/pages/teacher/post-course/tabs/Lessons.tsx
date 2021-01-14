@@ -6,7 +6,7 @@ import { Button, makeStyles, Theme } from "@material-ui/core";
 import { useFormik } from "formik";
 import Axios from "axios";
 import { useSelector } from "react-redux";
-import LessonsTree from "../lesson-tree";
+// import LessonsTree from "../lesson-tree";
 const useStyles = makeStyles((theme: Theme) => ({
   buttons: {
     display: "flex",
@@ -21,35 +21,56 @@ export default function ImageCourse(props: any) {
   const classes = useStyles();
   const user = useSelector((state: any) => state.user.value);
   const { values, setValues, activeStep, isLastStep, handleBack } = props;
-  const [courses, setCourses] = React.useState([{ title: "", url: "" }]);
+  const [courses, setCourses] = React.useState([{ title: "", videoUrl: "" }]);
   const formik = useFormik({
     initialValues: {
       title: "",
-      url: "",
+      videoUrl: "",
     },
     onSubmit: async (value: any) => {
       setValues({ ...values, lessons: courses });
-
-      // if (isLastStep) {
-      //   await Axios.post(
-      //     "http://localhost:3000/api/course/",
-      //     {},
-      //     {
-      //       headers: {
-      //         Authorization: "Bearer " + user.token,
-      //       },
-      //     }
-      //   ).then((res) => {
-      //     if (res.status === 200) {
-      //     }
-      //   });
-      // }
+      // setValues({ ...values, teacherId: user.id });
+      // console.log(...values, teacherId: user.id);
+      if (isLastStep) {
+        await Axios.post(
+          "http://localhost:3000/api/course/",
+          {
+            name: values.name,
+            teacherId: user.id,
+            categoryId: values.categoryId,
+            subCategoryId: values.subCategoryId,
+            // lessons: [
+            //   {
+            //     order: 1,
+            //     title: "test title",
+            //     description: "test des",
+            //     content: "test content",
+            //     videoUrl: "https://www.youtube.com/watch?v=pQN-pnXPaVg",
+            //   },
+            // ],
+            lessons: courses,
+            description: values.description,
+            overview: values.overview,
+          },
+          {
+            headers: {
+              Authorization:
+                "Bearer " +
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmZhMWNlNDU4MDg1YjFmYTQzYWRiNDIiLCJyb2xlSWQiOjIsImlhdCI6MTYxMDYzNzEwMiwiZXhwIjoxNjExMjQxOTAyfQ.FrjD6rQ59RlzSr7mQ_O5_HK-O-QCjGah6IGGZDQMRaI",
+            },
+          }
+        ).then((res) => {
+          if (res.status === 200) {
+            console.log("post course success");
+          }
+        });
+      }
     },
   });
   const addLesson = () => {
     // console.log(formik.values.title);
     const temp = courses;
-    temp.push({ title: formik.values.title, url: formik.values.url });
+    temp.push({ title: formik.values.title, videoUrl: formik.values.videoUrl });
     setCourses(courses);
     // console.log(temp);
   };
@@ -86,13 +107,13 @@ export default function ImageCourse(props: any) {
           <Grid item xs={12}>
             <TextField
               required
-              id="url"
-              name="url"
+              id="videoUrl"
+              name="videoUrl"
               label="Video Url"
               fullWidth
               autoComplete="video url"
               onChange={formik.handleChange}
-              value={formik.values.url}
+              value={formik.values.videoUrl}
             />
           </Grid>
         </Grid>

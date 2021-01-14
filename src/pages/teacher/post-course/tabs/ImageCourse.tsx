@@ -30,7 +30,7 @@ export default function ImageCourse(props: any) {
     },
     onSubmit: (value: any) => {
       // console.log(value);
-      setValues({ ...values, ...value });
+      setValues({ ...values, samplePictures: [value.imgUrl] });
       handleNext();
     },
   });
