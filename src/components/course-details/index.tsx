@@ -58,7 +58,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function CourseDetail() {
   const classes = useStyles();
   let { courseId }: { courseId: string } = useParams();
-  // console.log(courseId);
   const [course, setCourse] = React.useState({
     price: 0,
     rating: 0,
@@ -67,7 +66,12 @@ export default function CourseDetail() {
     teacherId: "",
     categoryId: "",
     subCategoryId: "5fecc976a705d61b5cf603cd",
-    samplePictures: [],
+    samplePictures: [
+      {
+        _id: "",
+        pictureUrl: "",
+      },
+    ],
     createdDate: "2021-01-07T04:53:17.899Z",
     lastEdited: "2021-01-07T04:53:17.899Z",
     feedback: [
@@ -200,10 +204,7 @@ export default function CourseDetail() {
         },
       }).then((res) => {
         if (res.status === 200) {
-          // setWatchlist(res.data);
           const temp = res.data?.map((item: any) => item._id === courseId);
-          // console.log(temp);
-          // console.log(temp.includes(true));
           setCheckBox(temp.includes(true));
         }
       });
@@ -227,6 +228,7 @@ export default function CourseDetail() {
           console.log("success");
         }
       });
+      return;
     }
     if (user.token) {
       await Axios.post(
@@ -244,17 +246,7 @@ export default function CourseDetail() {
         }
       });
     }
-    // await Axios.get("http://localhost:3000/api/watchlist", {
-    //   headers: {
-    //     Authorization: "Bearer " + user.token,
-    //   },
-    // }).then((res: any) => {
-    //   if (res.status === 200) {
-    //     localStorage.setItem("watchList", JSON.stringify(res.data));
-    //   }
-    // });
   };
-  // console.log(JSON.stringify(course) + "course");
 
   const [purchase, setPurchase] = React.useState(false);
   useEffect(() => {
@@ -267,13 +259,13 @@ export default function CourseDetail() {
           },
         }
       ).then((res) => {
-        if (res.status === 200) {
+        if (res.status === 200 && res.data.length !== 0) {
           setPurchase(true);
         }
       });
     }
     fetchData();
-  }, [courseId, user.token]);
+  }, []);
   const handlePurchaseCourse = async () => {
     if (user.token) {
       await Axios.post(
@@ -346,8 +338,8 @@ export default function CourseDetail() {
         </div>
         <img
           src={
-            course.samplePictures[0]
-              ? course.samplePictures[0]
+            course.samplePictures[0].pictureUrl
+              ? course.samplePictures[0].pictureUrl
               : "https://designshack.net/wp-content/uploads/placeholder-image.png"
           }
           alt=""

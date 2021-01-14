@@ -43,8 +43,8 @@ export default function Course({
       <img
         className="image-course"
         src={
-          samplePictures[0]
-            ? samplePictures[0]
+          samplePictures[0].pictureUrl
+            ? samplePictures[0].pictureUrl
             : "https://designshack.net/wp-content/uploads/placeholder-image.png"
         }
         alt={""}

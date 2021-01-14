@@ -1,0 +1,9 @@
+.margin{
+  margin: 80px 100px 0px 100px;
+}
+
+.image-course {
+  height: 70px;
+  border-radius: 10px;
+  margin-right: 10px;
+}

@@ -1,0 +1,17 @@
+.margin {
+	margin: 80px 100px 0px 100px;
+}
+
+.label-root {
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.subcate {
+	margin-right: 10px;
+}
+
+.categories-name{
+	margin-left: 10px;
+}

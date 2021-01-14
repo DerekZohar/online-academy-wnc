@@ -25,7 +25,7 @@ function Login({
   const dispatch = useDispatch();
 
   const history = useHistory();
-  const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
+  // const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
 
   const [openSB, setOpenSB] = useState(false);
   const handleClickSB = () => {

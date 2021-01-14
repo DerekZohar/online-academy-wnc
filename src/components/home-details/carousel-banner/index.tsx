@@ -12,6 +12,7 @@ import "swiper/components/pagination/pagination.scss";
 import HoverRating from "../../course-details/rating";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
+import { useSelector } from "react-redux";
 
 SwiperCore.use([Navigation]);
 SwiperCore.use([Pagination]);
@@ -20,13 +21,45 @@ SwiperCore.use([EffectFade]);
 
 export default function CarouselBanner() {
   const history = useHistory();
-  const handleClick = () => {
-    // history.push("/category/web/1");
+  const handleClick = (id: any) => {
+    history.push("/course/" + id);
   };
-  const [courseCB, setcourseCB] = useState([]);
+  const [courseCB, setcourseCB] = useState([
+    {
+      _id: "",
+      price: 0,
+      rating: 0,
+      discount: 0,
+      name: "",
+      teacherId: "",
+      samplePictures: [],
+      createdDate: "",
+      lastEdited: "",
+      teacher: {
+        _id: "",
+        email: "",
+        firstName: "",
+        lastName: "",
+        __v: 4,
+      },
+      subCategory: {
+        _id: "",
+        categoryName: "",
+      },
+      category: {
+        categoryName: "",
+        id: "",
+      },
+    },
+  ]);
   // console.log(process.env.REACT_APP_API_COURSES);
+  const user = useSelector((state: any) => state.user.value);
   useEffect(() => {
-    Axios.get(`${process.env.REACT_APP_API_COURSES}`).then((res) => {
+    Axios.get("http://localhost:3000/api/course?sortmode=2", {
+      headers: {
+        Authorization: "Bearer " + user.token,
+      },
+    }).then((res) => {
       setcourseCB(res.data);
     });
   }, []);
@@ -48,7 +81,7 @@ export default function CarouselBanner() {
       spaceBetween={5}
       slidesPerView={1}
     >
-      {Array.from(Array(5)).map((el, i) => {
+      {courseCB.map((el, i) => {
         return (
           <SwiperSlide
             key={`slide-${i}`}
@@ -57,7 +90,7 @@ export default function CarouselBanner() {
               display: "relative",
               cursor: "pointer",
             }}
-            onClick={handleClick}
+            onClick={() => handleClick(el._id)}
           >
             <div className="slide-container">
               <img
@@ -67,9 +100,9 @@ export default function CarouselBanner() {
               />
             </div>
             <div className="course-caption">
-              <p>Johnathan</p>
-              <h2>The Complete WordPress Website Course</h2>
-              <HoverRating ratingNumber={3} ratingOnly={true} />
+              <p>{el.teacher.firstName + el.teacher.lastName}</p>
+              <h2>{el.name}</h2>
+              <HoverRating ratingNumber={el.rating} ratingOnly={true} />
             </div>
           </SwiperSlide>
         );
