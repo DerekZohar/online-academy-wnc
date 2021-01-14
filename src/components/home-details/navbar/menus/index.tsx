@@ -1,13 +1,7 @@
 import React, { useEffect } from "react";
 import Button from "@material-ui/core/Button";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Grow from "@material-ui/core/Grow";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import NestedList from "./menu";
 import { Menu } from "@material-ui/core";
 import NestedMenuItem from "material-ui-nested-menu-item";
 import Axios from "axios";
@@ -85,7 +79,7 @@ export default function MenuListComposition() {
     });
   };
   const history = useHistory();
-  const user = useSelector((state: any) => state.user.value);
+  // const user = useSelector((state: any) => state.user.value);
   const handleItemClick = async (value: any) => {
     console.log("/search/" + value);
     history.push("/search/" + value);
