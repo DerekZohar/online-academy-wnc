@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../../pages/login/loginSlice";
 import Alert from "@material-ui/lab/Alert";
+import ForgotPasswordDialog from "./forgot-pass-dialog";
 
 function Login({
   handleToggle,
@@ -20,7 +21,7 @@ function Login({
   handleToggle: any;
   handleClose: any;
 }) {
-  const user = useSelector((state: any) => state.user.value);
+  // const user = useSelector((state: any) => state.user.value);
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -44,7 +45,7 @@ function Login({
     const unregisterAuthObserver = firebase
       .auth()
       .onAuthStateChanged((user) => {
-        setIsSignedIn(!!user);
+        // setIsSignedIn(!!user);
         if (!user) {
           console.log("not user");
         } else {
@@ -83,7 +84,15 @@ function Login({
         });
     },
   });
+  const [openFP, setOpenFP] = React.useState(false);
 
+  const handleClickOpen = () => {
+    setOpenFP(true);
+  };
+
+  const handleCloseForgotPass = () => {
+    setOpenFP(false);
+  };
   return (
     <form action="#" className="sign-in-form" onSubmit={formik.handleSubmit}>
       <h2 className="title">Sign in</h2>
@@ -97,6 +106,7 @@ function Login({
           value={formik.values.username}
         />
       </div>
+      <ForgotPasswordDialog open={openFP} handleClose={handleCloseForgotPass} />
       <div className="input-field">
         <Lock />
         <input
@@ -108,7 +118,9 @@ function Login({
         />
       </div>
       {/* {loader} */}
-      <Button color="primary">Forgot password?</Button>
+      <Button color="primary" onClick={handleClickOpen}>
+        Forgot password?
+      </Button>
       <input
         type="submit"
         defaultValue="Login"
