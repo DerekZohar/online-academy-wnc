@@ -61,7 +61,7 @@ export default function MultiCarouselMostView(props: any) {
   const user = useSelector((state: any) => state.user.value);
   useEffect(() => {
     async function fetchData() {
-      await Axios.get("http://localhost:3000/api/course?sortmode=0", {
+      await Axios.get("http://14.225.27.135/api/course?sortmode=0", {
         headers: {
           Authorization: "Bearer " + user.token,
         },

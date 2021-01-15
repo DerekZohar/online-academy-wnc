@@ -45,7 +45,7 @@ export default function AdminCategories() {
   ]);
 
   const onDeleteCategory = async (id: any) => {
-    await Axios.delete("http://localhost:3000/api/category/" + id, {
+    await Axios.delete("http://14.225.27.135/api/category/" + id, {
       headers: {
         Authorization: "Bearer " + user.token,
       },
@@ -57,7 +57,7 @@ export default function AdminCategories() {
         alert(error);
       });
 
-    await Axios.get("http://localhost:3000/api/category")
+    await Axios.get("http://14.225.27.135/api/category")
       .then((res) => {
         setList(res.data);
       })
@@ -68,7 +68,7 @@ export default function AdminCategories() {
 
   const onDeleteSub = async (subid: any, id: any) => {
     await Axios.delete(
-      "http://localhost:3000/api/category/" + id + "/" + subid,
+      "http://14.225.27.135/api/category/" + id + "/" + subid,
       {
         headers: {
           Authorization: "Bearer " + user.token,
@@ -82,7 +82,7 @@ export default function AdminCategories() {
         alert(error);
       });
 
-    await Axios.get("http://localhost:3000/api/category")
+    await Axios.get("http://14.225.27.135/api/category")
       .then((res) => {
         setList(res.data);
       })
@@ -108,7 +108,7 @@ export default function AdminCategories() {
       setAddCateOpen(false);
     } else {
       await Axios.post(
-        "http://localhost:3000/api/category/",
+        "http://14.225.27.135/api/category/",
         {
           categoryName: NewCateName,
         },
@@ -126,7 +126,7 @@ export default function AdminCategories() {
           alert(error);
         });
 
-      await Axios.get("http://localhost:3000/api/category")
+      await Axios.get("http://14.225.27.135/api/category")
         .then((res) => {
           setList(res.data);
         })
@@ -154,7 +154,7 @@ export default function AdminCategories() {
       setAddSubOpen(false);
     } else {
       await Axios.post(
-        "http://localhost:3000/api/category/" + CateID,
+        "http://14.225.27.135/api/category/" + CateID,
         {
           categoryName: NewSubCate,
         },
@@ -172,7 +172,7 @@ export default function AdminCategories() {
           alert(error);
         });
 
-      await Axios.get("http://localhost:3000/api/category")
+      await Axios.get("http://14.225.27.135/api/category")
         .then((res) => {
           setList(res.data);
         })
@@ -184,7 +184,7 @@ export default function AdminCategories() {
 
   useEffect(() => {
     async function fetchdata() {
-      await Axios.get("http://localhost:3000/api/category")
+      await Axios.get("http://14.225.27.135/api/category")
         .then((res) => {
           setList(res.data);
         })

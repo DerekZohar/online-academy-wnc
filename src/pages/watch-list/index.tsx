@@ -28,7 +28,7 @@ const AllProjects = () => {
   const [courses, setCourses] = React.useState([]);
   React.useEffect(() => {
     async function fetchData() {
-      await Axios.get("http://localhost:3000/api/watchlist", {
+      await Axios.get("http://14.225.27.135/api/watchlist", {
         headers: {
           Authorization: "Bearer " + user.token,
         },

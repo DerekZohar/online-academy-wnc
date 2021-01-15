@@ -70,7 +70,7 @@ export default function Profile() {
       setFirstNameOpen(false);
     } else {
       await Axios.put(
-        "http://localhost:3000/api/user",
+        "http://14.225.27.135/api/user",
         {
           firstName: tempFirstName,
           userId: user.id,
@@ -105,7 +105,7 @@ export default function Profile() {
       setLastNameOpen(false);
     } else {
       await Axios.put(
-        "http://localhost:3000/api/user",
+        "http://14.225.27.135/api/user",
         {
           lastName: tempLastName,
           userId: user.id,
@@ -130,7 +130,7 @@ export default function Profile() {
   useEffect(() => {
     async function fetchdata() {
       await Axios.put(
-        "http://localhost:3000/api/user",
+        "http://14.225.27.135/api/user",
         {
           birthDate: currentbirthDay,
           userId: user.id,
@@ -172,7 +172,7 @@ export default function Profile() {
       };
       console.log(userDataToPost);
       await Axios.put(
-        `http://localhost:3000/api/authentication/change_password`,
+        `http://14.225.27.135/api/authentication/change_password`,
         userDataToPost,
         {
           headers: {

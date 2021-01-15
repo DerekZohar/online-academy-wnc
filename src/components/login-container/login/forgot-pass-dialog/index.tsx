@@ -15,7 +15,7 @@ export default function ForgotPasswordDialog(props: any) {
     initialValues: { email: "" },
     onSubmit: async () => {
       await Axios.post(
-        "http://localhost:3000/api/authentication/forgot_password",
+        "http://14.225.27.135/api/authentication/forgot_password",
         {
           email: formik.values.email,
         }

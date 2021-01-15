@@ -55,7 +55,7 @@ export default function CarouselBanner() {
   // console.log(process.env.REACT_APP_API_COURSES);
   const user = useSelector((state: any) => state.user.value);
   useEffect(() => {
-    Axios.get("http://localhost:3000/api/course?sortmode=2", {
+    Axios.get("http://14.225.27.135/api/course?sortmode=2", {
       headers: {
         Authorization: "Bearer " + user.token,
       },

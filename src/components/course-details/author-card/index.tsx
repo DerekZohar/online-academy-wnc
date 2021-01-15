@@ -10,7 +10,7 @@ export default function AuthorCard(props: any) {
   const [teacher, setTeacher] = useState({});
   useEffect(() => {
     async function fetchData() {
-      await Axios.get("http://localhost:3000/api/" + courseId, {
+      await Axios.get("http://14.225.27.135/api/" + courseId, {
         headers: {
           Authorization: "Bearer " + user.token,
         },
@@ -24,7 +24,7 @@ export default function AuthorCard(props: any) {
   }, []);
   useEffect(() => {
     async function fetchData() {
-      await Axios.get("http://localhost:3000/api/user" + teacherId, {
+      await Axios.get("http://14.225.27.135/api/user" + teacherId, {
         headers: {
           Authorization: "Bearer " + user.token,
         },

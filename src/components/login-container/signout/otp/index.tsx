@@ -25,7 +25,7 @@ export default function FormDialog({
   console.log(otpCode);
   console.log(email);
   const handleVerify = async () => {
-    await Axios.post("http://localhost:3000/api/authentication/verify", {
+    await Axios.post("http://14.225.27.135/api/authentication/verify", {
       email: email,
       otp: otpCode,
     }).then((res) => {

@@ -33,7 +33,7 @@ export default function ImageCourse(props: any) {
       // console.log(...values, teacherId: user.id);
       if (isLastStep) {
         await Axios.post(
-          "http://localhost:3000/api/course/",
+          "http://14.225.27.135/api/course/",
           {
             name: values.name,
             teacherId: user.id,

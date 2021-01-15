@@ -18,7 +18,7 @@ export default function LearnCourseItem() {
 
   useEffect(() => {
     async function fetchData() {
-      await Axios.get("http://localhost:3000/api/course/" + courseId, {
+      await Axios.get("http://14.225.27.135/api/course/" + courseId, {
         headers: {
           Authorization: "Bearer " + user.token,
         },

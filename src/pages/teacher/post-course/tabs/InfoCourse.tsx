@@ -49,7 +49,7 @@ export default function InfoCourse(props: any) {
   ]);
   useEffect(() => {
     async function fetchData() {
-      await Axios.get("http://localhost:3000/api/category").then((res) => {
+      await Axios.get("http://14.225.27.135/api/category").then((res) => {
         if (res.status === 200) {
           setCategories(res.data);
         }

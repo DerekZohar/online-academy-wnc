@@ -90,7 +90,7 @@ export default function CourseDetail() {
 
   useEffect(() => {
     async function fetchData() {
-      await Axios.get("http://localhost:3000/api/course/" + courseId).then(
+      await Axios.get("http://14.225.27.135/api/course/" + courseId).then(
         (res) => {
           setCourse(res.data);
           // console.log(JSON.stringify(course) + "course");
@@ -105,7 +105,7 @@ export default function CourseDetail() {
   const [checkBox, setCheckBox] = React.useState(false);
   useEffect(() => {
     async function fetchData() {
-      await Axios.get("http://localhost:3000/api/watchlist", {
+      await Axios.get("http://14.225.27.135/api/watchlist", {
         headers: {
           Authorization: "Bearer " + user.token,
         },
@@ -122,7 +122,7 @@ export default function CourseDetail() {
   const dispatch = useDispatch();
   const handleCheckBox = async () => {
     if (checkBox === true) {
-      await Axios.delete("http://localhost:3000/api/watchlist/" + courseId, {
+      await Axios.delete("http://14.225.27.135/api/watchlist/" + courseId, {
         headers: {
           Authorization: "Bearer " + user.token,
         },
@@ -137,7 +137,7 @@ export default function CourseDetail() {
     }
     if (user.token) {
       await Axios.post(
-        "http://localhost:3000/api/watchlist/" + courseId,
+        "http://14.225.27.135/api/watchlist/" + courseId,
         {},
         {
           headers: {
@@ -157,7 +157,7 @@ export default function CourseDetail() {
   useEffect(() => {
     async function fetchData() {
       await Axios.get(
-        "http://localhost:3000/api/purchase?courseId=" + courseId,
+        "http://14.225.27.135/api/purchase?courseId=" + courseId,
         {
           headers: {
             Authorization: "Bearer " + user.token,
@@ -174,7 +174,7 @@ export default function CourseDetail() {
   const handlePurchaseCourse = async () => {
     if (user.token) {
       await Axios.post(
-        "http://localhost:3000/api/purchase/" + courseId,
+        "http://14.225.27.135/api/purchase/" + courseId,
         {},
         {
           headers: {

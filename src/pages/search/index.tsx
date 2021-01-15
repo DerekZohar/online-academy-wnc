@@ -19,14 +19,11 @@ export default function SearchPage() {
 
   useEffect(() => {
     async function fetchData() {
-      await Axios.get(
-        "http://localhost:3000/api/course?keyword=" + searchName,
-        {
-          headers: {
-            Authorization: "Bearer " + user.token,
-          },
-        }
-      ).then((res) => {
+      await Axios.get("http://14.225.27.135/api/course?keyword=" + searchName, {
+        headers: {
+          Authorization: "Bearer " + user.token,
+        },
+      }).then((res) => {
         if (res.status === 200) {
           console.log(res.data);
           setCourses(res.data);

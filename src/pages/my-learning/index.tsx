@@ -43,7 +43,7 @@ export default function MyLearning() {
   const user = useSelector((state: any) => state.user.value);
   useEffect(() => {
     async function fetchData() {
-      await Axios.get("http://localhost:3000/api/purchase", {
+      await Axios.get("http://14.225.27.135/api/purchase", {
         headers: {
           Authorization: "Bearer " + user.token,
         },
