@@ -143,7 +143,7 @@ export default function AvatarUser() {
                     <MenuItem onClick={handleMyCourse}>My course</MenuItem>
                   )}
 
-                  {user.roleId === 3 ? (
+                  {/* {user.roleId === 3 ? (
                     <div>
                       <MenuItem
                         onClick={() => history.push("/admin/course-management")}
@@ -165,7 +165,7 @@ export default function AvatarUser() {
                     </div>
                   ) : (
                     ""
-                  )}
+                  )} */}
                   <hr />
                   {/* <MenuItem onClick={handleClose}>Public Profile</MenuItem> */}
                   <MenuItem onClick={handleProfile}>Edit Profile</MenuItem>

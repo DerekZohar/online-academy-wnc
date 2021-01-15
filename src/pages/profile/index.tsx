@@ -13,8 +13,13 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { editUser } from "../login/loginSlice";
 import Axios from "axios";
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import {
+  DatePicker,
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import { useFormik } from "formik";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -154,6 +159,36 @@ export default function Profile() {
     setPassOpen(false);
   };
 
+  const formik = useFormik({
+    initialValues: {
+      oldPassword: "",
+      newPassword: "",
+    },
+    onSubmit: async (values) => {
+      const userDataToPost = {
+        email: user.email,
+        oldPassword: formik.values.oldPassword,
+        newPassword: formik.values.newPassword,
+      };
+      console.log(userDataToPost);
+      await Axios.put(
+        `http://localhost:3000/api/authentication/change_password`,
+        userDataToPost,
+        {
+          headers: {
+            Authorization: "Bearer " + user.token,
+          },
+        }
+      )
+        .then((res) => {
+          if (res.status === 200) {
+            alert("change success");
+          }
+        })
+        .catch((error) => console.log(error));
+      // setOpen(true);
+    },
+  });
   return (
     <div className="Container">
       <div>
@@ -260,22 +295,38 @@ export default function Profile() {
         >
           <DialogTitle>Change Password</DialogTitle>
           <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              label="Old Password"
-              fullWidth
-            />
-            <TextField margin="dense" label="New Password" fullWidth />
+            <form
+              action=""
+              style={{ padding: 0 }}
+              onSubmit={formik.handleSubmit}
+            >
+              <TextField
+                autoFocus
+                margin="dense"
+                label="Old Password"
+                name="oldPassword"
+                fullWidth
+                value={formik.values.oldPassword}
+                onChange={formik.handleChange}
+              />
+              <TextField
+                margin="dense"
+                label="New Password"
+                fullWidth
+                name="newPassword"
+                value={formik.values.newPassword}
+                onChange={formik.handleChange}
+              />
+              <DialogActions>
+                <Button onClick={handlePassClose} color="primary">
+                  Cancel
+                </Button>
+                <Button type="submit" onClick={handlePassClose} color="primary">
+                  OK
+                </Button>
+              </DialogActions>
+            </form>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={handlePassClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={handlePassClose} color="primary">
-              OK
-            </Button>
-          </DialogActions>
         </Dialog>
       </div>
     </div>

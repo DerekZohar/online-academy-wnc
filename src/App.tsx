@@ -26,8 +26,10 @@ import MyLearning from "./pages/my-learning";
 import CourseManagement from "./pages/admin/course-management";
 import CategoryManagement from "./pages/admin/categories-management";
 import UserManagement from "./pages/admin/users-management";
-
+import { useSelector } from "react-redux";
 import PostCourse from "./pages/teacher/post-course";
+import AminNavbar from "./components/adminNavbar";
+import AdminNavbar from "./components/adminNavbar";
 
 function App() {
   if (!firebase.apps.length) {
@@ -57,6 +59,7 @@ function App() {
   // }, []);
 
   const dispatch = useDispatch();
+  // const user = useSelector((state: any) => state.user.value);
 
   console.log(checkObjEmpty(userInfo));
   if (checkObjEmpty(userInfo) === false) {

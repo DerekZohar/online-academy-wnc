@@ -14,6 +14,7 @@ import { checkObjEmpty } from "../../../helpers/checkObjEmpty";
 import { userLogin } from "../../../pages/login/loginSlice";
 import Axios from "axios";
 import { useFormik } from "formik";
+import AdminNavbar from "../../adminNavbar";
 
 export const Nav = styled.nav`
   background: #fff;
@@ -127,7 +128,7 @@ export default function Navbar() {
 
   if (location.pathname === "/login" || location.pathname === "/sign-out")
     return null;
-
+  if (user.roleId === 3) return <AdminNavbar />;
   return (
     <Nav>
       <NavLink to="/">
