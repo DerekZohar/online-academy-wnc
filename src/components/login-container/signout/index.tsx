@@ -29,7 +29,7 @@ export default function SignOut({
         firstName: values.firstName,
         lastName: values.lastName,
         email: values.email,
-        roleId: values.roleId ? 2 : 1,
+        roleId: 1,
         birthDate: selectedDate?.toString(),
         password: values.password,
       };
@@ -129,14 +129,14 @@ export default function SignOut({
             <DatePicker value={selectedDate} onChange={handleDateChange} />
           </MuiPickersUtilsProvider>
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox value="allowExtraEmails" color="primary" />}
             label="Teacher?"
             onChange={formik.handleChange}
             value={formik.values.roleId}
           />
-        </Grid>
+        </Grid> */}
       </Grid>
 
       {/* <div className="input-field">
