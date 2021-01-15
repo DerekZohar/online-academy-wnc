@@ -57,7 +57,11 @@ const AllProjects = () => {
           .slice((page - 1) * itemsPerPage, page * itemsPerPage)
           .map((projectItem: any, index: any) => {
             // const labelId = `list-secondary-label-${projectItem.name}`;
-            return <Course key={index} {...projectItem} />;
+            return (
+              <div>
+                <Course key={index} {...projectItem} />
+              </div>
+            );
           })}
       </List>
       <Divider />

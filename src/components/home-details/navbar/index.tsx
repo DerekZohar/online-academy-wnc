@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkObjEmpty } from "../../../helpers/checkObjEmpty";
 import { userLogin } from "../../../pages/login/loginSlice";
 import Axios from "axios";
+import { useFormik } from "formik";
 
 export const Nav = styled.nav`
   background: #fff;
@@ -122,6 +123,8 @@ export default function Navbar() {
   const isLogin = user.token ? true : false;
   const location = useLocation();
 
+  const [searchValue, setSearchValue] = useState("");
+
   if (location.pathname === "/login" || location.pathname === "/sign-out")
     return null;
 
@@ -134,12 +137,8 @@ export default function Navbar() {
       {/* <Bars /> */}
       <NavMenu>
         <SearchBar
-          // onChange={(value) =>
-          //   setDataSrc({
-          //     dataSource: [value, value + value, value + value + value],
-          //   })
-          // }
-          onRequestSearch={() => console.log("onRequestSearch")}
+          onChange={(value: any) => setSearchValue(value)}
+          onRequestSearch={() => history.push("/search/" + searchValue)}
           style={{
             margin: "0 auto",
             width: 600,

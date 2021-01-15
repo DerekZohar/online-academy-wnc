@@ -5,35 +5,17 @@ import { formatNumber } from "../../helpers/formatNumber";
 import HoverRating from "../course-details/rating";
 import "./styles.css";
 
-export default function Course({
-  _id,
-  price,
-  rating,
-  discount,
-  name,
-  teacherId,
-  samplePictures,
-  createdDate,
-  lastEdited,
-  __v,
-  teacher,
-  subCategory,
-  category,
-}: {
-  _id: any;
-  price: any;
-  rating: any;
-  discount: any;
-  name: any;
-  teacherId: any;
-  samplePictures: any;
-  createdDate: any;
-  lastEdited: any;
-  __v: any;
-  teacher: any;
-  subCategory: any;
-  category: any;
-}) {
+export default function Course(props: any) {
+  const {
+    samplePictures,
+    _id,
+    name,
+    teacherId,
+    rating,
+    price,
+    discount,
+  } = props;
+  // console.log(samplePictures);
   const history = useHistory();
   const handleClick = () => {
     history.push("/course/" + _id);
@@ -42,11 +24,7 @@ export default function Course({
     <div className="course" onClick={handleClick}>
       <img
         className="image-course"
-        src={
-          samplePictures[0].pictureUrl
-            ? samplePictures[0].pictureUrl
-            : "https://designshack.net/wp-content/uploads/placeholder-image.png"
-        }
+        src={"https://designshack.net/wp-content/uploads/placeholder-image.png"}
         alt={""}
       />
       <div className="info">
@@ -55,9 +33,9 @@ export default function Course({
         <div className="row-icon-group">
           <div className="row">
             <Face />
-            <p className="authors">
+            {/* <p className="authors">
               {teacher.firstName.concat(" " + teacher.lastName)}
-            </p>
+            </p> */}
           </div>
 
           <div className="row">

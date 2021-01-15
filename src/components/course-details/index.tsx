@@ -101,100 +101,7 @@ export default function CourseDetail() {
   }, [courseId]);
 
   const user = useSelector((state: any) => state.user.value);
-  // const course = {
-  //   id: "123",
-  //   cost: 100,
-  //   title: "Python Programmers",
-  //   summary: "Learn features and constructs for Python",
-  //   descriptions: {
-  //     title: "About this Course",
-  //     content: [
-  //       "Python for Programmers is designed for students who are familiar with a programming language and wish to learn Python.",
-  //       "This course focuses on 'how' as opposed to 'what'. For example, in the lesson on functions, we do not teach what a function is, but rather how to create a function in C++.",
-  //       "The lessons are taught by several different instructors who have used Python in their professional careers, so students get to experience different perspectives.",
-  //       "The course also includes comments and tips from Bjarne Stroustrup - the original designer of Python.",
-  //     ],
-  //   },
-  //   // timeline: "24:10",
-  //   // skillLv: "Intermediate",
-  //   // includedInProduct: [
-  //   //   "Rich Learning Content",
-  //   //   "Taught by Industry Pros",
-  //   //   "Interactive Quizzes",
-  //   //   "Self-Paced Learning",
-  //   // ],
-  //   rating: {
-  //     rateNum: 4.6,
-  //     studentRateNum: 333905,
-  //   },
-  //   studentNum: 1170294,
-  //   sale: 91,
-  //   lastUpdate: "1/1/2020",
-  //   relativeCourse: [
-  //     {
-  //       title: "Python Programmers",
-  //       rating: {
-  //         rateNum: 4.6,
-  //         studentRateNum: 333905,
-  //       },
-  //       studentNum: 1170294,
-  //       sale: 91,
-  //       lastUpdate: "1/1/2020",
-  //       timeline: "24:10",
-  //       price: 11.99,
-  //     },
-  //     {
-  //       title: "Python Programmers",
-  //       rating: {
-  //         rateNum: 4.6,
-  //         studentRateNum: 333905,
-  //       },
-  //       studentNum: 1170294,
-  //       sale: 91,
-  //       lastUpdate: "1/1/2020",
-  //       timeline: "24:10",
-  //       price: 11.99,
-  //     },
-  //     {
-  //       title: "Python Programmers",
-  //       rating: {
-  //         rateNum: 4.6,
-  //         studentRateNum: 333905,
-  //       },
-  //       studentNum: 1170294,
-  //       sale: 91,
-  //       lastUpdate: "1/1/2020",
-  //       timeline: "24:10",
-  //       price: 11.99,
-  //     },
-  //     {
-  //       title: "Python Programmers",
-  //       rating: {
-  //         rateNum: 4.6,
-  //         studentRateNum: 333905,
-  //       },
-  //       studentNum: 1170294,
-  //       sale: 91,
-  //       lastUpdate: "1/1/2020",
-  //       timeline: "24:10",
-  //       price: 11.99,
-  //     },
-  //     {
-  //       title: "Python Programmers",
-  //       rating: {
-  //         rateNum: 4.6,
-  //         studentRateNum: 333905,
-  //       },
-  //       studentNum: 1170294,
-  //       sale: 91,
-  //       lastUpdate: "1/1/2020",
-  //       timeline: "24:10",
-  //       price: 11.99,
-  //     },
-  //   ],
-  // };
 
-  // const watchListTemp = localStorage.getItem("watchList");
   const [checkBox, setCheckBox] = React.useState(false);
   useEffect(() => {
     async function fetchData() {
@@ -214,8 +121,6 @@ export default function CourseDetail() {
 
   const dispatch = useDispatch();
   const handleCheckBox = async () => {
-    // console.log(user.token);
-
     if (checkBox === true) {
       await Axios.delete("http://localhost:3000/api/watchlist/" + courseId, {
         headers: {
@@ -225,7 +130,7 @@ export default function CourseDetail() {
         if (res.status === 200) {
           setCheckBox(false);
           dispatch(addFavCourse(courseId));
-          console.log("success");
+          // console.log("success");
         }
       });
       return;
@@ -408,7 +313,7 @@ export default function CourseDetail() {
 
       {/* <CourseGroup course={course.relativeCourse}></CourseGroup> */}
 
-      <AuthorCard></AuthorCard>
+      <AuthorCard courseId={courseId}></AuthorCard>
       <StudentFeedback></StudentFeedback>
     </div>
   );

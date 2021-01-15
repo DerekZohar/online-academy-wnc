@@ -13,7 +13,7 @@ import Axios from "axios";
 
 export default function SearchPage() {
   let { searchName }: { searchName: string } = useParams();
-  // console.log(searchName);
+  console.log(searchName);
   const user = useSelector((state: any) => state.user.value);
   const [courses, setCourses] = React.useState([1, 2, 3, 4, 5]);
 
@@ -28,41 +28,13 @@ export default function SearchPage() {
         }
       ).then((res) => {
         if (res.status === 200) {
-          // console.log(res.data);
+          console.log(res.data);
           setCourses(res.data);
         }
       });
     }
     fetchData();
   }, [searchName, user.token]);
-  // const rates = [4.5, 4, 3.5, 3];
-  const course = {
-    _id: "5ff693bd9c016639ac03c93c",
-    price: 0,
-    rating: 0,
-    discount: 0,
-    name: "Advanced HTML course",
-    teacherId: "5ff5733e628d5a0da0ace07b",
-    samplePictures: [],
-    createdDate: "2021-01-07T04:53:17.899Z",
-    lastEdited: "2021-01-07T04:53:17.899Z",
-    __v: 3,
-    teacher: {
-      _id: "5ff5733e628d5a0da0ace07b",
-      email: "tranthuanthanh@gmail.com",
-      firstName: "Tran",
-      lastName: "Thanh",
-      __v: 0,
-    },
-    subCategory: {
-      _id: "5fecc976a705d61b5cf603cd",
-      categoryName: "HTML",
-    },
-    category: {
-      categoryName: "Web",
-      id: "5fecc59582979f0bc81cc81f",
-    },
-  };
 
   const changeCourse = (rating: number) => {
     //change course follow rating value
@@ -82,8 +54,8 @@ export default function SearchPage() {
       <p>All Development courses</p>
       <div className="course-div">
         <div className="course-left">
-          <FilterCourse changeCourse={changeCourse} />
-          <FormControl variant="outlined">
+          {/* <FilterCourse changeCourse={changeCourse} /> */}
+          {/* <FormControl variant="outlined">
             <InputLabel htmlFor="outlined-age-native-simple">Sort</InputLabel>
             <Select
               native
@@ -101,11 +73,11 @@ export default function SearchPage() {
               <option value={"priceup"}>Price up</option>
               <option value={"pricedown"}>Price down</option>
             </Select>
-          </FormControl>
+          </FormControl> */}
         </div>
         <div className="course-right">
           {courses.map((item, idx) => {
-            return <Course key={idx} {...course} />;
+            return <Course key={idx} {...item} />;
           })}
         </div>
       </div>

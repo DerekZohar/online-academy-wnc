@@ -142,9 +142,34 @@ export default function AvatarUser() {
                   ) : (
                     <MenuItem onClick={handleMyCourse}>My course</MenuItem>
                   )}
+
+                  {user.roleId === 3 ? (
+                    <div>
+                      <MenuItem
+                        onClick={() => history.push("/admin/course-management")}
+                      >
+                        Course management
+                      </MenuItem>
+                      <MenuItem
+                        onClick={() =>
+                          history.push("/admin/categories-management")
+                        }
+                      >
+                        Category management
+                      </MenuItem>
+                      <MenuItem
+                        onClick={() => history.push("/admin/user-management")}
+                      >
+                        User management
+                      </MenuItem>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                   <hr />
                   {/* <MenuItem onClick={handleClose}>Public Profile</MenuItem> */}
                   <MenuItem onClick={handleProfile}>Edit Profile</MenuItem>
+
                   <hr />
                   <MenuItem onClick={handleLogOut}>Log out</MenuItem>
                 </MenuList>
