@@ -75,7 +75,7 @@ export default function MultiCarouselMostView(props: any) {
 
   return (
     <div className="multicarousel">
-      <h2 className="most-view">Most View</h2>
+      <h2 className="most-view">New</h2>
       <Swiper
         id="multicarousel-container"
         width={1200}

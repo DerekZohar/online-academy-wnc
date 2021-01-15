@@ -140,7 +140,14 @@ export default function AvatarUser() {
                       </MenuItem>
                     </div>
                   ) : (
-                    <MenuItem onClick={handleMyCourse}>My course</MenuItem>
+                    <div>
+                      <MenuItem onClick={handleMyCourse}>My course</MenuItem>
+                      <MenuItem
+                        onClick={() => history.push("/teacher/post-course")}
+                      >
+                        Post Course
+                      </MenuItem>
+                    </div>
                   )}
 
                   {/* {user.roleId === 3 ? (
